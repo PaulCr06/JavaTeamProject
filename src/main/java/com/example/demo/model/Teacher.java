@@ -1,10 +1,15 @@
 package com.example.demo.model;
 
-public class Teacher {
+import org.apache.catalina.User;
+
+import java.util.List;
+
+public class Teacher extends Staff {
     private String titel;
     private String DepartmentId;
 
-    public Teacher(String titel, String DepartmentId) {
+    public Teacher(String id, String name, List<TeachingAssignment> assignments, String titel, String DepartmentId) {
+        super(id, name, assignments);
         this.titel = titel;
         this.DepartmentId = DepartmentId;
     }
