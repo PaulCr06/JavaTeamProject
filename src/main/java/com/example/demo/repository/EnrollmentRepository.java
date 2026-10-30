@@ -9,23 +9,28 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class EnrollmentRepository {
+public class EnrollmentRepository implements  Interface<Enrollment,String> {
     private final Map<String, Enrollment> enrollments = new HashMap<>();
 
-    public Enrollment save(Enrollment enrollment) {
-        enrollments.put(enrollment.getId(), enrollment);
-        return enrollment;
+
+    @Override
+    public Enrollment save(Enrollment entity) {
+        enrollments.put(entity.getId(), entity);
+        return entity;
     }
 
+    @Override
     public List<Enrollment> findAll() {
-        return new ArrayList<>(enrollments.values());
+        return new  ArrayList<>(enrollments.values());
     }
 
-    public Enrollment findById(String id) {
-        return enrollments.get(id);
+    @Override
+    public Enrollment findById(String s) {
+        return  enrollments.get(s);
     }
 
-    public void delete(String id) {
-        enrollments.remove(id);
+    @Override
+    public void delete(String s) {
+        enrollments.remove(s);
     }
 }

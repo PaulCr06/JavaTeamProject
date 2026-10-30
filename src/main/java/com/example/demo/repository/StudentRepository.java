@@ -20,7 +20,9 @@ public class StudentRepository implements Interface<Student, String> {
 
     @Override
     public List<Student> findAll() {
-        return new ArrayList<>(store.values());
+        List<Student> students = new ArrayList<>();
+        students.addAll(store.values());
+        return students;
     }
 
     @Override

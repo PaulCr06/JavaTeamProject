@@ -9,22 +9,27 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class AssistantRepository {
+public class AssistantRepository implements Interface<Assistant,String> {
     private final Map<String, Assistant> assistants = new HashMap<>();
 
-    public Assistant save(Assistant assistant) {
-        assistants.put(assistant.getId(), assistant);
-        return assistant;
+
+    @Override
+    public Assistant save(Assistant entity) {
+        assistants.put(entity.getId(), entity);
+        return entity;
     }
 
+    @Override
     public List<Assistant> findAll() {
         return new ArrayList<>(assistants.values());
     }
 
+    @Override
     public Assistant findById(String id) {
         return assistants.get(id);
     }
 
+    @Override
     public void delete(String id) {
         assistants.remove(id);
     }
