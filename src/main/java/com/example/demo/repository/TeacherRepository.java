@@ -9,7 +9,7 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-
+@Repository
 public class TeacherRepository implements Interface<Teacher, String> {
     private final Map<String, Teacher> teachers = new HashMap<>();
 
