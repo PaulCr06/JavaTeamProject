@@ -3,9 +3,10 @@ package com.example.demo.service;
 import com.example.demo.model.University;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.repository.UniversityRepository;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
-
+@Service
 public class UniversityService {
 
     private UniversityRepository universityRepository;
