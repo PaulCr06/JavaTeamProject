@@ -1,28 +1,23 @@
-University Management System 
+University Management System - Projekt 1
 
-Teammitglieder
-Paul Cracea
-Andrei Lisenchi
+Team: Paul Cracea & Andrei Lisenchi
 
+Hier ist unsere Spring Boot-Anwendung für das erste Projekt. Wir haben das vorgegebene UML-Diagramm für ein Universitätsverwaltungssystem umgesetzt. Aktuell laufen alle Daten In-Memory ohne echte Datenbank.
 
-Controller & Services: Wir haben uns entschieden, für jede Entität einen eigenen Controller und Service zu erstellen (z. B. StudentController, StudentService), anstatt alles in einer großen Datei zu sammeln. Das hält den Code übersichtlich und folgt dem Single-Responsibility-Prinzip.
+Architektur
 
-Repositories: Alle Daten werden vorerst in einfachen Java-Collections (Listen) im Arbeitsspeicher gehalten.
+Wir haben das MVC-Pattern angewendet und die Schichten (Model, Repository, Service, Controller) strikt getrennt. Damit der Code übersichtlich bleibt und dem Single-Responsibility-Prinzip entspricht, hat jede Entität (wie Student oder Teacher) ihren eigenen Controller und Service, statt alles in großen Sammelklassen zu bündeln. Die Repositories nutzen vorerst einfache Java-Listen.
 
 Modellerweiterungen
 
-Um die Anforderungen zu erfüllen, haben wir drei Klassen um neue, realistische Attribute erweitert:
+Zusätzlich zum UML-Diagramm haben wir folgende Attribute ergänzt:
 
-Student: LocalDate birthDate und String email hinzugefügt.
+Student: birthDate (LocalDate) und email (String)
 
-Teacher: LocalDate hireDate und String email hinzugefügt.
+Teacher: hireDate (LocalDate) und email (String)
 
-Enrollment: LocalDate enrollmentDate hinzugefügt.
+Enrollment: enrollmentDate (LocalDate)
 
-Clean Code & Prinzipien
+Clean Code
 
-Prinzipien: Wir haben auf KISS und SOLID geachtet. Abhängigkeiten werden sauber über Konstruktoren injiziert.
-
-Konventionen: Klassen nutzen PascalCase, Methoden und Variablen camelCase.
-
-Datentypen: Wie gefordert, nutzen wir java.time.LocalDate für Datumsangaben statt einfacher Strings.
+Wir haben uns an SOLID und KISS orientiert. Abhängigkeiten werden direkt über Konstruktoren injiziert. Außerdem nutzen wir konsequent PascalCase für Klassen, camelCase für Methoden/Variablen und LocalDate statt Strings für Datumsangaben.
