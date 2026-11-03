@@ -19,6 +19,7 @@ public class Teacher extends Staff{
         this.hireDate = hireDate;
     }
 
+
     public String getTitel() {
         return titel;
     }
