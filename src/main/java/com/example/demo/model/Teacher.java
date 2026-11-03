@@ -1,7 +1,8 @@
 package com.example.demo.model;
+
 import java.time.LocalDate;
 
-public class Teacher extends Staff{
+public class Teacher extends Staff  {
     private String titel;
     private String departmentID;
     private String email;

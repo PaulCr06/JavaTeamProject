@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
-public class Course {
+public class Course implements Identifiable<String> {
     private String id;
     private String titel;
     private int credits;

@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
-public class University {
+public class University implements Identifiable<String> {
     private String id;
     private String name;
     private String city;

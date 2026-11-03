@@ -1,5 +1,6 @@
 package com.example.demo.repository;
 
+import com.example.demo.model.Assistant;
 import com.example.demo.model.Student;
 import org.springframework.stereotype.Repository;
 
@@ -9,31 +10,5 @@ import java.util.List;
 import java.util.Map;
 
 @Repository
-public class StudentRepository implements Interface<Student, String> {
-
-    // Key is studentId
-    private final Map<String, Student> store = new HashMap<>();
-
-    @Override
-    public Student save(Student student) {
-        store.put(student.getId(), student);
-        return student;
-    }
-
-    @Override
-    public List<Student> findAll() {
-        List<Student> students = new ArrayList<>();
-        students.addAll(store.values());
-        return students;
-    }
-
-    @Override
-    public Student findById(String id) {
-        return store.get(id);
-    }
-
-    @Override
-    public void delete(String id) {
-        store.remove(id);
-    }
+public class StudentRepository extends FileRepository<Student, String>{
 }

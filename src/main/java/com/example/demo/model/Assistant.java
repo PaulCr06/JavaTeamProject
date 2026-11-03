@@ -1,7 +1,7 @@
 package com.example.demo.model;
 
 
-    public class Assistant extends Staff {
+public class Assistant extends Staff  {
         private String role;
 
         public Assistant() {

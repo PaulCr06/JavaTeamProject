@@ -1,6 +1,6 @@
 package com.example.demo.model;
 
-public class TeachingAssignment {
+public class TeachingAssignment implements Identifiable<String> {
     private String id;
     private String courseId;
     private String staffID;

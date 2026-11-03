@@ -1,7 +1,8 @@
 package com.example.demo.model;
+
 import java.time.LocalDate;
 
-public class Enrollment {
+public class Enrollment implements Identifiable<String> {
     private String id;
     private String studentId;
     private String courseID;

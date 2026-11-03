@@ -1,8 +1,9 @@
 package com.example.demo.model;
+
 import java.util.ArrayList;
 import java.util.List;
 
-public abstract class Staff {
+public abstract class Staff implements Identifiable<String> {
     private String id;
     private String  name;
     private List<TeachingAssignment> assignments = new ArrayList<>();

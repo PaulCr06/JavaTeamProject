@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.util.List;
 
-public class Room {
+public class Room implements Identifiable<String>{
     private String id;
     private double capacity;
     private String number;

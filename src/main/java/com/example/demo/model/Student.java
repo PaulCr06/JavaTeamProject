@@ -1,9 +1,10 @@
 package com.example.demo.model;
+
 import java.util.ArrayList;
 import java.util.List;
 import java.time.LocalDate;
 
-public class Student {
+public class Student implements Identifiable<String> {
     private String id;
     private String name;
     private List<Enrollment> enrollments = new ArrayList<>();
