@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Add Teacher</title>
+</head>
+<body>
+<!--/*@thymesVar id="teacher" type="com.example.demo.model.Teacher"*/-->
+<h1>Add a New Teacher</h1>
+
+<form th:action="@{/teacher}" th:object="${teacher}" method="post">
+    <label>ID:</label>
+    <input type="text" th:field="*{id}" required /><br><br>
+
+    <label>Name:</label>
+    <input type="text" th:field="*{name}" required /><br><br>
+
+    <label>Email:</label>
+    <input type="email" th:field="*{email}" required /><br><br>
+
+    <label>Hire Date:</label>
+    <input type="date" th:field="*{hireDate}" required /><br><br>
+
+    <button type="submit">Save</button>
+</form>
+<br>
+<a th:href="@{/teacher}">Back to list</a>
+</body>
+</html>

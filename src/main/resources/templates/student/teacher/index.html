@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Teacher List</title>
+</head>
+<body>
+<h1>Teacher List</h1>
+<a th:href="@{/teacher/new}">Add a new teacher</a>
+<br><br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Name</th>
+        <th>Email</th>
+        <th>Hire Date</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${teachers}">
+        <td th:text="${item.id}">1</td>
+        <td th:text="${item.name}">Name</td>
+        <td th:text="${item.email}">Email</td>
+        <td th:text="${item.hireDate}">Date</td>
+        <td>
+            <form th:action="@{'/teacher/' + ${item.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
