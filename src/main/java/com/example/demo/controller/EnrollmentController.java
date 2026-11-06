@@ -17,13 +17,13 @@ public class EnrollmentController {
     @GetMapping("/enrollment")
     public String getAllEnrollments(Model model){
         model.addAttribute("enrollment", enrollmentService.getAllEnrollments());
-        return "enrollment/index";
+        return "student/enrollment/index";
     }
 
     @GetMapping("/enrollment/new")
     public String showCreateForm(Model model) {
         model.addAttribute("enrollment", new Enrollment());
-        return "enrollment/form";
+        return "student/enrollment/form";
     }
 
     @PostMapping("/enrollment")
