@@ -15,11 +15,10 @@
     <input type="text" th:field="*{courseId}" required /><br><br>
 
     <label>Staff ID:</label>
-    <input type="text" th:field="*{staffID}" required /><br><br>
+    <input type="text" th:field="*{staffId}" required /><br><br>
 
     <label>Managing Role:</label>
     <select th:field="*{managing}" required>
-        <!-- Iterăm prin valorile din enum trimise de Controller -->
         <option th:each="type : ${managingTypes}"
                 th:value="${type}"
                 th:text="${type}"></option>

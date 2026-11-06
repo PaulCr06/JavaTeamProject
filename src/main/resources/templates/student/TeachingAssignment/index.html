@@ -22,7 +22,7 @@
     <tr th:each="item : ${assignments}">
         <td th:text="${item.id}">1</td>
         <td th:text="${item.courseId}">C1</td>
-        <td th:text="${item.staffID}">S1</td>
+        <td th:text="${item.staffId}">S1</td>
         <td th:text="${item.managing}">ROLE</td>
         <td>
             <form th:action="@{'/teachingassignment/' + ${item.id} + '/delete'}" method="post">

@@ -18,14 +18,14 @@ public class TeachingAssignmentController {
     @GetMapping("/teachingassignment")
     public String getAllAssignments(Model model) {
         model.addAttribute("assignments", teachingAssignmentService.getAllAssignments());
-        return "teachingassignment/index";
+        return "student/TeachingAssignment/index";
     }
 
     @GetMapping("/teachingassignment/new")
     public String showCreateForm(Model model) {
         model.addAttribute("teachingAssignment", new TeachingAssignment());
         model.addAttribute("managingTypes", ManagingType.values());
-        return "teachingassignment/form";
+        return "student/TeachingAssignment/form";
     }
 
     @PostMapping("/teachingassignment")

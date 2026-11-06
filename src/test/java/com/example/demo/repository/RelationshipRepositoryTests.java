@@ -1,6 +1,7 @@
 package com.example.demo.repository;
 
 import com.example.demo.model.Enrollment;
+import com.example.demo.model.ManagingType;
 import com.example.demo.model.TeachingAssignment;
 import org.junit.jupiter.api.Test;
 
@@ -25,9 +26,9 @@ class RelationshipRepositoryTests {
     @Test
     void findsAssignmentsByCourseAndStaff() {
         TeachingAssignmentRepository repository = new TeachingAssignmentRepository();
-        repository.save(new TeachingAssignment("a1", "c1", "staff1", "yes"));
-        repository.save(new TeachingAssignment("a2", "c2", "staff1", "no"));
-        repository.save(new TeachingAssignment("a3", "c1", "staff2", "no"));
+        repository.save(new TeachingAssignment("a1", "c1", "staff1", ManagingType.COURSE_MANAGER));
+        repository.save(new TeachingAssignment("a2", "c2", "staff1", ManagingType.LAB_ASSISTANT));
+        repository.save(new TeachingAssignment("a3", "c1", "staff2", ManagingType.SEMINAR_TUTOR));
 
         assertEquals(List.of("a1", "a3"), repository.findByCourseId("c1").stream()
                 .map(TeachingAssignment::getId).sorted().toList());

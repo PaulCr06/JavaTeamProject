@@ -17,13 +17,13 @@ public class AssistantController {
     @GetMapping("/assistant")
     public String getAllAssistants(Model model) {
         model.addAttribute("assistants", assistantService.getAllAssistants());
-        return "assistant/index";
+        return "student/Assistant/index";
     }
 
     @GetMapping("/assistant/new")
     public String showCreateForm(Model model) {
         model.addAttribute("assistant", new Assistant());
-        return "assistant/form";
+        return "student/Assistant/form";
     }
 
     @PostMapping("/assistant")
