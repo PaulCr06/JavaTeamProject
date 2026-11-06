@@ -3,8 +3,8 @@ package com.example.demo.model;
 import java.time.LocalDate;
 
 public class Teacher extends Staff  {
-    private String titel;
-    private String departmentID;
+    private String title;
+    private String departmentId;
     private String email;
     private LocalDate hireDate;
 
@@ -12,29 +12,29 @@ public class Teacher extends Staff  {
         super();
     }
 
-    public Teacher(String id, String name, String titel, String departmentID, String email, LocalDate hireDate){
+    public Teacher(String id, String name, String title, String departmentId, String email, LocalDate hireDate){
         super(id, name);
-        this.titel = titel;
-        this.departmentID = departmentID;
+        this.title = title;
+        this.departmentId = departmentId;
         this.email = email;
         this.hireDate = hireDate;
     }
 
 
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
 
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
 
-    public String getDepartmentID() {
-        return departmentID;
+    public String getDepartmentId() {
+        return departmentId;
     }
 
-    public void setDepartmentID(String departmentID) {
-        this.departmentID = departmentID;
+    public void setDepartmentId(String departmentId) {
+        this.departmentId = departmentId;
     }
 
     public String getEmail() {

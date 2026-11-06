@@ -16,13 +16,13 @@ public class CourseService {
   public Course saveCourse(Course course) {
       return courseRepository.save(course);
   }
-  public Course getCourse(String Id) {
-      return courseRepository.findById(Id);
+  public Course getCourse(String id) {
+      return courseRepository.findById(id);
   }
   public List<Course> getAllCourses() {
       return courseRepository.findAll();
   }
-  public void delete(String Id) {
-      courseRepository.delete(Id);
+  public void delete(String id) {
+      courseRepository.delete(id);
   }
 }

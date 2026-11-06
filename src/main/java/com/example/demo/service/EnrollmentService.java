@@ -22,6 +22,14 @@ public class EnrollmentService {
         return enrollmentRepository.findAll();
     }
 
+    public List<Enrollment> getEnrollmentsByStudentId(String studentId) {
+        return enrollmentRepository.findByStudentId(studentId);
+    }
+
+    public List<Enrollment> getEnrollmentsByCourseId(String courseId) {
+        return enrollmentRepository.findByCourseId(courseId);
+    }
+
     public Enrollment getEnrollmentById(String id) {
         return enrollmentRepository.findById(id);
     }

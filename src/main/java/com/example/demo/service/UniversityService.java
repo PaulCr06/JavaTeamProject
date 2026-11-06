@@ -17,13 +17,13 @@ public class UniversityService {
     public University saveUniversity(University university) {
         return universityRepository.save(university);
     }
-    public void deleteUniversity(String Id) {
-        universityRepository.delete(Id);
+    public void deleteUniversity(String id) {
+        universityRepository.delete(id);
     }
     public List<University> getAllUniversity() {
         return universityRepository.findAll();
     }
-    public University getUniversityById(String Id) {
-        return universityRepository.findById(Id);
+    public University getUniversityById(String id) {
+        return universityRepository.findById(id);
     }
 }

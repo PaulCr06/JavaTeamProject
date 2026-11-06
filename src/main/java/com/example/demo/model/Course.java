@@ -4,7 +4,7 @@ import java.util.List;
 
 public class Course implements Identifiable<String> {
     private String id;
-    private String titel;
+    private String title;
     private int credits;
     private String departmentId;
     private String roomId;
@@ -14,9 +14,9 @@ public class Course implements Identifiable<String> {
 
     public Course(){}
 
-    public Course(String id, String titel, int credits, String departmentId, String roomId,List<Enrollment>enrollments,List<TeachingAssignment> assignments) {
+    public Course(String id, String title, int credits, String departmentId, String roomId,List<Enrollment>enrollments,List<TeachingAssignment> assignments) {
         this.id = id;
-        this.titel = titel;
+        this.title = title;
         this.credits = credits;
         this.departmentId = departmentId;
         this.roomId = roomId;
@@ -29,11 +29,11 @@ public class Course implements Identifiable<String> {
     public void setId(String id) {
         this.id = id;
     }
-    public String getTitel() {
-        return titel;
+    public String getTitle() {
+        return title;
     }
-    public void setTitel(String titel) {
-        this.titel = titel;
+    public void setTitle(String title) {
+        this.title = title;
     }
     public int getCredits() {
         return credits;

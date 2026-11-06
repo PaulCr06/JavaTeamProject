@@ -6,7 +6,7 @@ Hier ist unsere Spring Boot-Anwendung für das erste Projekt. Wir haben das vorg
 
 Architektur
 
-Wir haben das MVC-Pattern angewendet und die Schichten (Model, Repository, Service, Controller) strikt getrennt. Damit der Code übersichtlich bleibt und dem Single-Responsibility-Prinzip entspricht, hat jede Entität (wie Student oder Teacher) ihren eigenen Controller und Service, statt alles in großen Sammelklassen zu bündeln. Die Repositories nutzen vorerst einfache Java-Listen.
+Wir haben das MVC-Pattern angewendet und die Schichten (Model, Repository, Service, Controller) strikt getrennt. Damit der Code übersichtlich bleibt und dem Single-Responsibility-Prinzip entspricht, hat jede Entität (wie Student oder Teacher) ihren eigenen Controller und Service, statt alles in großen Sammelklassen zu bündeln. Die typspezifischen Repositories verwenden ein gemeinsames CRUD-Interface und eine generische In-Memory-Implementierung mit Maps.
 
 Modellerweiterungen
 

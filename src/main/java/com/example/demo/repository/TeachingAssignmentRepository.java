@@ -1,15 +1,22 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Assistant;
 import com.example.demo.model.TeachingAssignment;
-import org.springframework.beans.factory.InitializingBean;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
 import java.util.List;
-import java.util.Map;
+import java.util.Objects;
 
 @Repository
-public class TeachingAssignmentRepository extends FileRepository<TeachingAssignment, String>{
+public class TeachingAssignmentRepository extends InMemoryRepository<TeachingAssignment, String> {
+    public List<TeachingAssignment> findByCourseId(String courseId) {
+        return findAll().stream()
+                .filter(assignment -> Objects.equals(courseId, assignment.getCourseId()))
+                .toList();
+    }
+
+    public List<TeachingAssignment> findByStaffId(String staffId) {
+        return findAll().stream()
+                .filter(assignment -> Objects.equals(staffId, assignment.getStaffId()))
+                .toList();
+    }
 }

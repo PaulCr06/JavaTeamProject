@@ -21,7 +21,7 @@ public class RoomService {
     public Room saveRoom(Room room) {
         return roomRepository.save(room);
     }
-    public void deleteRoom(String Id) {
-        roomRepository.delete(Id);
+    public void deleteRoom(String id) {
+        roomRepository.delete(id);
     }
 }

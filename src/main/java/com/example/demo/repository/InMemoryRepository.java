@@ -6,13 +6,13 @@ import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
 
-public abstract class FileRepository<T extends Identifiable<ID>, ID> implements Interface<T, ID> {
+public abstract class InMemoryRepository<T extends Identifiable<ID>, ID> implements CrudRepository<T, ID> {
 
     protected final Map<ID, T> repositoryMap = new HashMap<>();
 
     @Override
     public T save(T entity) {
-        repositoryMap.put(entity.getId(), entity); // Works universally now!
+        repositoryMap.put(entity.getId(), entity);
         return entity;
     }
 

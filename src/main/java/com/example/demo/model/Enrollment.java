@@ -5,17 +5,17 @@ import java.time.LocalDate;
 public class Enrollment implements Identifiable<String> {
     private String id;
     private String studentId;
-    private String courseID;
+    private String courseId;
     private String grade;
 
     private LocalDate enrollmentDate;
 
     public Enrollment(){}
 
-    public Enrollment(String id, String studentId, String courseID, String grade, LocalDate enrollmentDate){
+    public Enrollment(String id, String studentId, String courseId, String grade, LocalDate enrollmentDate){
         this.id = id;
         this.studentId = studentId;
-        this.courseID = courseID;
+        this.courseId = courseId;
         this.grade = grade;
         this.enrollmentDate = enrollmentDate;
     }
@@ -36,12 +36,12 @@ public class Enrollment implements Identifiable<String> {
         this.studentId = studentId;
     }
 
-    public String getCourseID() {
-        return courseID;
+    public String getCourseId() {
+        return courseId;
     }
 
-    public void setCourseID(String courseID) {
-        this.courseID = courseID;
+    public void setCourseId(String courseId) {
+        this.courseId = courseId;
     }
 
     public String getGrade() {

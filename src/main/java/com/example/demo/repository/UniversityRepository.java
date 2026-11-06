@@ -1,14 +1,8 @@
 package com.example.demo.repository;
 
-import com.example.demo.model.Assistant;
 import com.example.demo.model.University;
 import org.springframework.stereotype.Repository;
 
-import java.util.ArrayList;
-import java.util.HashMap;
-import java.util.List;
-import java.util.Map;
-
 @Repository
-public class UniversityRepository extends FileRepository<University, String>{
+public class UniversityRepository extends InMemoryRepository<University, String>{
 }

@@ -3,15 +3,15 @@ package com.example.demo.model;
 public class TeachingAssignment implements Identifiable<String> {
     private String id;
     private String courseId;
-    private String staffID;
+    private String staffId;
     private String managing;
 
     public TeachingAssignment(){}
 
-    public TeachingAssignment(String id, String courseId, String staffID, String managing){
+    public TeachingAssignment(String id, String courseId, String staffId, String managing){
         this.id = id;
         this.courseId = courseId;
-        this.staffID = staffID;
+        this.staffId = staffId;
         this.managing = managing;
     }
 
@@ -31,12 +31,12 @@ public class TeachingAssignment implements Identifiable<String> {
         this.managing = managing;
     }
 
-    public String getStaffID() {
-        return staffID;
+    public String getStaffId() {
+        return staffId;
     }
 
-    public void setStaffID(String staffID) {
-        this.staffID = staffID;
+    public void setStaffId(String staffId) {
+        this.staffId = staffId;
     }
 
     public String getCourseId() {

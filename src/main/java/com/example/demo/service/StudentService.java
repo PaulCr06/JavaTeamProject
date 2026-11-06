@@ -20,11 +20,11 @@ public Student saveStudent(Student student) {
 public List<Student> findAllStudents() {
     return studentRepository.findAll();
 }
-public  void deleteStudent(String Id) {
-    studentRepository.delete(Id);
+public  void deleteStudent(String id) {
+    studentRepository.delete(id);
 }
-public Student findStudentById(String Id) {
-   return studentRepository.findById(Id);
+public Student findStudentById(String id) {
+   return studentRepository.findById(id);
 }
 
 }
