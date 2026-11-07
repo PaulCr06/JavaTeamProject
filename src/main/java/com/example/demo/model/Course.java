@@ -1,5 +1,6 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Course implements Identifiable<String> {
@@ -8,8 +9,8 @@ public class Course implements Identifiable<String> {
     private int credits;
     private String departmentId;
     private String roomId;
-    private List<Enrollment> enrollments;
-    private List<TeachingAssignment> assignments;
+    private List<Enrollment> enrollments = new ArrayList<>();
+    private List<TeachingAssignment> assignments = new ArrayList<>();
 
 
     public Course(){}

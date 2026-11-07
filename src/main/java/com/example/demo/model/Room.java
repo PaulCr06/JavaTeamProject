@@ -1,12 +1,15 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class Room implements Identifiable<String>{
     private String id;
     private double capacity;
     private String number;
-    private List<Course> courses;
+    private List<Course> courses = new ArrayList<>();
+
+    public Room() {}
 
     public Room(String id, double capacity, String number, List<Course> courses) {
         this.id = id;

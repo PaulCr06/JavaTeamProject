@@ -22,7 +22,7 @@ public class CourseService {
   public List<Course> getAllCourses() {
       return courseRepository.findAll();
   }
-  public void delete(String id) {
+  public void deleteCourse(String id) {
       courseRepository.delete(id);
   }
 }

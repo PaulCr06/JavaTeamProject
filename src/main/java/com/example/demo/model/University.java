@@ -1,13 +1,14 @@
 package com.example.demo.model;
 
+import java.util.ArrayList;
 import java.util.List;
 
 public class University implements Identifiable<String> {
     private String id;
     private String name;
     private String city;
-    private List<Department> departments;
-    private List<Room>rooms;
+    private List<Department> departments = new ArrayList<>();
+    private List<Room>rooms = new ArrayList<>();
 
     public University(){}
 
