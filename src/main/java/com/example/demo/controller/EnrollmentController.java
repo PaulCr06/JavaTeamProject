@@ -16,7 +16,7 @@ public class EnrollmentController {
 
     @GetMapping("/enrollment")
     public String getAllEnrollments(Model model){
-        model.addAttribute("enrollment", enrollmentService.getAllEnrollments());
+        model.addAttribute("enrollments", enrollmentService.getAllEnrollments());
         return "student/enrollment/index";
     }
 

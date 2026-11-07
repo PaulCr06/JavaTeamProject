@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Room List</title>
+</head>
+<body>
+<h1>Room List</h1>
+<a th:href="@{/room/new}">Add a new room</a>
+<br><br>
+
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Number</th>
+        <th>Capacity</th>
+        <th>Courses</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="item : ${rooms}">
+        <td th:text="${item.id}">ID</td>
+        <td th:text="${item.number}">Number</td>
+        <td th:text="${item.capacity}">Capacity</td>
+        <td th:text="${#lists.size(item.courses)}">0</td>
+        <td>
+            <form th:action="@{'/room/' + ${item.id} + '/delete'}" method="post">
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+</body>
+</html>
