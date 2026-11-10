@@ -1,12 +1,82 @@
 [
-  { "id": "t1", "name": "Bocu Razvan", "email": "razvan.bocu@ubbcluj.ro" },
-  { "id": "t2", "name": "Czibula Gabriela", "email": "gabriela.czibula@ubbcluj.ro" },
-  { "id": "t3", "name": "Serban Camelia", "email": "camelia.serban@ubbcluj.ro" },
-  { "id": "t4", "name": "Suciu Dan", "email": "dan.suciu@ubbcluj.ro" },
-  { "id": "t5", "name": "Boian Rares", "email": "rares.boian@ubbcluj.ro" },
-  { "id": "t6", "name": "Mircea Marian", "email": "marian.mircea@ubbcluj.ro" },
-  { "id": "t7", "name": "Craciun Florin", "email": "florin.craciun@ubbcluj.ro" },
-  { "id": "t8", "name": "Sterca Cornel", "email": "cornel.sterca@ubbcluj.ro" },
-  { "id": "t9", "name": "Darabant Sergiu", "email": "sergiu.darabant@ubbcluj.ro" },
-  { "id": "t10", "name": "Guran Adriana", "email": "adriana.guran@ubbcluj.ro" }
+  {
+    "id": "t1",
+    "name": "Bocu Razvan",
+    "title": "Professor",
+    "departmentId": "dep1",
+    "email": "razvan.bocu@ubbcluj.ro",
+    "hireDate": "2010-10-01"
+  },
+  {
+    "id": "t2",
+    "name": "Czibula Gabriela",
+    "title": "Professor",
+    "departmentId": "dep1",
+    "email": "gabriela.czibula@ubbcluj.ro",
+    "hireDate": "2012-10-01"
+  },
+  {
+    "id": "t3",
+    "name": "Serban Camelia",
+    "title": "Associate Professor",
+    "departmentId": "dep2",
+    "email": "camelia.serban@ubbcluj.ro",
+    "hireDate": "2015-10-01"
+  },
+  {
+    "id": "t4",
+    "name": "Suciu Dan",
+    "title": "Lecturer",
+    "departmentId": "dep1",
+    "email": "dan.suciu@ubbcluj.ro",
+    "hireDate": "2018-10-01"
+  },
+  {
+    "id": "t5",
+    "name": "Boian Rares",
+    "title": "Associate Professor",
+    "departmentId": "dep3",
+    "email": "rares.boian@ubbcluj.ro",
+    "hireDate": "2016-10-01"
+  },
+  {
+    "id": "t6",
+    "name": "Mircea Marian",
+    "title": "Lecturer",
+    "departmentId": "dep2",
+    "email": "marian.mircea@ubbcluj.ro",
+    "hireDate": "2019-10-01"
+  },
+  {
+    "id": "t7",
+    "name": "Craciun Florin",
+    "title": "Professor",
+    "departmentId": "dep1",
+    "email": "florin.craciun@ubbcluj.ro",
+    "hireDate": "2011-10-01"
+  },
+  {
+    "id": "t8",
+    "name": "Sterca Cornel",
+    "title": "Lecturer",
+    "departmentId": "dep2",
+    "email": "cornel.sterca@ubbcluj.ro",
+    "hireDate": "2020-10-01"
+  },
+  {
+    "id": "t9",
+    "name": "Darabant Sergiu",
+    "title": "Lecturer",
+    "departmentId": "dep3",
+    "email": "sergiu.darabant@ubbcluj.ro",
+    "hireDate": "2017-10-01"
+  },
+  {
+    "id": "t10",
+    "name": "Guran Adriana",
+    "title": "Lecturer",
+    "departmentId": "dep1",
+    "email": "adriana.guran@ubbcluj.ro",
+    "hireDate": "2021-10-01"
+  }
 ]
