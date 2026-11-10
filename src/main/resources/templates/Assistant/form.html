@@ -15,7 +15,11 @@
     <input type="text" th:field="*{name}" required /><br><br>
 
     <label>Role:</label>
-    <input type="text" th:field="*{role}" required /><br><br>
+    <select th:field="*{role}" required>
+        <option th:each="type : ${roleTypes}"
+                th:value="${type}"
+                th:text="${type}"></option>
+    </select><br><br>
 
     <button type="submit">Save</button>
 </form>

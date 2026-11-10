@@ -6,7 +6,7 @@
 <body>
 <h1>Add a New Course</h1>
 
-<form th:action="@{/course}" th:object="${course}" method="post">
+<form th:action="@{/courses}" th:object="${course}" method="post">
     <label>ID:</label>
     <input type="text" th:field="*{id}" required /><br><br>
 
@@ -25,6 +25,6 @@
     <button type="submit">Save</button>
 </form>
 <br>
-<a th:href="@{/course}">Back to list</a>
+<a th:href="@{/courses}">Back to list</a>
 </body>
 </html>

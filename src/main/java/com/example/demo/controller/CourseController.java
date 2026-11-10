@@ -27,25 +27,25 @@ public class CourseController {
         this.courseService = courseService;
         
     }
-    @GetMapping("/course")
+    @GetMapping("/courses")
     public String getAllCourses(Model model){
         model.addAttribute("courses",courseService.getAllCourses());
         return "Course/index";
     }
-    @GetMapping("/course/new")
+    @GetMapping("/courses/new")
     public String showCreateForm(Model model){
         model.addAttribute("course",new Course());
         return "Course/form";
     }
-    @PostMapping("/course")
+    @PostMapping("/courses")
     public String saveCourse(@ModelAttribute  Course course) {
         courseService.saveCourse(course);
-        return "redirect:/course";
+        return "redirect:/courses";
     }
-     @PostMapping("/course/{id}/delete")
+     @PostMapping("/courses/{id}/delete")
     public String deleteCourse(@PathVariable  String id) {
         courseService.deleteCourse(id);
-        return "redirect:/course";
+        return "redirect:/courses";
     }
     
 

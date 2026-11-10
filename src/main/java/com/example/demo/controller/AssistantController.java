@@ -1,7 +1,10 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Assistant;
+import com.example.demo.model.Roles;
 import com.example.demo.service.AssistantService;
+
+import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
@@ -17,18 +20,21 @@ public class AssistantController {
     @GetMapping("/assistant")
     public String getAllAssistants(Model model) {
         model.addAttribute("assistants", assistantService.getAllAssistants());
-        return "student/Assistant/index";
+        return "Assistant/index";
     }
 
     @GetMapping("/assistant/new")
     public String showCreateForm(Model model) {
         model.addAttribute("assistant", new Assistant());
-        return "student/Assistant/form";
+        model.addAttribute("roleTypes",Roles.values());
+        return "Assistant/form";
     }
 
     @PostMapping("/assistant")
     public String saveAssistant(@ModelAttribute Assistant assistant) {
+        
         assistantService.saveAssistant(assistant);
+    
         return "redirect:/assistant";
     }
 

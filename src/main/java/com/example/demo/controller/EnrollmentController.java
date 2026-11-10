@@ -1,6 +1,7 @@
 package com.example.demo.controller;
 
 import com.example.demo.model.Enrollment;
+import com.example.demo.model.Grade;
 import com.example.demo.service.EnrollmentService;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -17,13 +18,14 @@ public class EnrollmentController {
     @GetMapping("/enrollment")
     public String getAllEnrollments(Model model){
         model.addAttribute("enrollments", enrollmentService.getAllEnrollments());
-        return "student/enrollment/index";
+        return "enrollment/index";
     }
 
     @GetMapping("/enrollment/new")
     public String showCreateForm(Model model) {
         model.addAttribute("enrollment", new Enrollment());
-        return "student/enrollment/form";
+        model.addAttribute("gradeTypes",Grade.values());
+        return "enrollment/form";
     }
 
     @PostMapping("/enrollment")

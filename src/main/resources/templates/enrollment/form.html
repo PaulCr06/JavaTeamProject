@@ -18,7 +18,11 @@
     <input type="text" th:field="*{courseId}" required /><br><br>
 
     <label>Grade:</label>
-    <input type="text" th:field="*{grade}" required /><br><br>
+    <select th:field="*{grade}" required>
+        <option th:each="type : ${gradeTypes}"
+                th:value="${type}"
+                th:text="${type}"></option>
+    </select><br><br>
 
     <label>Enrollment Date:</label>
     <input type="date" th:field="*{enrollmentDate}" required /><br><br>

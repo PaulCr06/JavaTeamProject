@@ -16,7 +16,7 @@ public class TeacherController {
     @GetMapping("/teacher")
     public String getAllTeachers(Model model){
         model.addAttribute("teachers", teacherService.findAllTeachers());
-        return "student/teacher/index";
+        return "teacher/index";
     }
 
     @GetMapping("/teacher/new")

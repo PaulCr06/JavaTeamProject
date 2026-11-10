@@ -6,13 +6,13 @@ public class Enrollment implements Identifiable<String> {
     private String id;
     private String studentId;
     private String courseId;
-    private String grade;
+    private Grade grade;
 
     private LocalDate enrollmentDate;
 
     public Enrollment(){}
 
-    public Enrollment(String id, String studentId, String courseId, String grade, LocalDate enrollmentDate){
+    public Enrollment(String id, String studentId, String courseId, Grade grade, LocalDate enrollmentDate){
         this.id = id;
         this.studentId = studentId;
         this.courseId = courseId;
@@ -44,11 +44,11 @@ public class Enrollment implements Identifiable<String> {
         this.courseId = courseId;
     }
 
-    public String getGrade() {
+    public Grade getGrade() {
         return grade;
     }
 
-    public void setGrade(String grade) {
+    public void setGrade(Grade grade) {
         this.grade = grade;
     }
 

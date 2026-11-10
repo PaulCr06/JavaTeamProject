@@ -1,11 +1,11 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Course List</title>
+    <title>Courses List</title>
 </head>
 <body>
-<h1>Course List</h1>
-<a th:href="@{/course/new}">Add a new course</a>
+<h1>Courses List</h1>
+<a th:href="@{/courses/new}">Add a new course</a>
 <br><br>
 
 <table border="1">
@@ -31,7 +31,7 @@
         <td th:text="${item.enrollments}">Enrollments</td>
         <td th:text="${item.assignments}">Assignments</td>
         <td>
-            <form th:action="@{'/course/' + ${item.id} + '/delete'}" method="post">
+            <form th:action="@{'/courses/' + ${item.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
         </td>
