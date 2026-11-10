@@ -20,6 +20,22 @@ public class Enrollment implements Identifiable<String> {
         this.enrollmentDate = enrollmentDate;
     }
 
+    public Enrollment(String id, String studentId, String courseId, String grade, LocalDate enrollmentDate){
+        this(id, studentId, courseId, parseGrade(grade), enrollmentDate);
+    }
+
+    private static Grade parseGrade(String grade) {
+        if (grade == null || grade.isBlank()) {
+            return Grade.NA;
+        }
+
+        try {
+            return Grade.valueOf(grade.trim().toUpperCase());
+        } catch (IllegalArgumentException ex) {
+            return Grade.NA;
+        }
+    }
+
     public String getId() {
         return id;
     }

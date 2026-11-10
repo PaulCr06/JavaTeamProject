@@ -11,4 +11,16 @@ public class TeachingAssignmentRepository extends InFileRepository<TeachingAssig
     public TeachingAssignmentRepository() {
         super("src/main/resources/data/teachingassignment.json", TeachingAssignment.class);
     }
+
+    public List<TeachingAssignment> findByCourseId(String courseId) {
+        return findAll().stream()
+                .filter(assignment -> Objects.equals(courseId, assignment.getCourseId()))
+                .toList();
+    }
+
+    public List<TeachingAssignment> findByStaffId(String staffId) {
+        return findAll().stream()
+                .filter(assignment -> Objects.equals(staffId, assignment.getStaffId()))
+                .toList();
+    }
 }

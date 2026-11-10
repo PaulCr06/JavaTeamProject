@@ -26,9 +26,9 @@ class RelationshipRepositoryTests {
     @Test
     void findsAssignmentsByCourseAndStaff() {
         TeachingAssignmentRepository repository = new TeachingAssignmentRepository();
-        repository.save(new TeachingAssignment("a1", "c1", "staff1", ManagingType.COURSE_MANAGER));
-        repository.save(new TeachingAssignment("a2", "c2", "staff1", ManagingType.LAB_ASSISTANT));
-        repository.save(new TeachingAssignment("a3", "c1", "staff2", ManagingType.SEMINAR_TUTOR));
+        repository.save(new TeachingAssignment("a1", "c1", "staff1", ManagingType.Course));
+        repository.save(new TeachingAssignment("a2", "c2", "staff1", ManagingType.Lab));
+        repository.save(new TeachingAssignment("a3", "c1", "staff2", ManagingType.Seminary));
 
         assertEquals(List.of("a1", "a3"), repository.findByCourseId("c1").stream()
                 .map(TeachingAssignment::getId).sorted().toList());
