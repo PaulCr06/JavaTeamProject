@@ -1,62 +1,12 @@
 [
-  {
-    "id": "e1",
-    "studentId": "1",
-    "courseId": "c1",
-    "grade": "A"
-  },
-  {
-    "id": "e2",
-    "studentId": "2",
-    "courseId": "c1",
-    "grade": "A"
-  },
-  {
-    "id": "e3",
-    "studentId": "3",
-    "courseId": "c2",
-    "grade": "B"
-  },
-  {
-    "id": "e4",
-    "studentId": "4",
-    "courseId": "c2",
-    "grade": "A"
-  },
-  {
-    "id": "e5",
-    "studentId": "5",
-    "courseId": "c3",
-    "grade": "D"
-  },
-  {
-    "id": "e6",
-    "studentId": "6",
-    "courseId": "c3",
-    "grade": "F"
-  },
-  {
-    "id": "e7",
-    "studentId": "7",
-    "courseId": "c4",
-    "grade": "A"
-  },
-  {
-    "id": "e8",
-    "studentId": "8",
-    "courseId": "c4",
-    "grade": "B"
-  },
-  {
-    "id": "e9",
-    "studentId": "9",
-    "courseId": "c5",
-    "grade": "C"
-  },
-  {
-    "id": "e10",
-    "studentId": "10",
-    "courseId": "c5",
-    "grade": "A"
-  }
+  { "id": "e1", "studentId": "1", "courseId": "c1", "grade": "A", "enrollmentDate": "2026-10-01" },
+  { "id": "e2", "studentId": "2", "courseId": "c1", "grade": "B", "enrollmentDate": "2026-10-01" },
+  { "id": "e3", "studentId": "3", "courseId": "c2", "grade": "C", "enrollmentDate": "2026-10-02" },
+  { "id": "e4", "studentId": "4", "courseId": "c2", "grade": "A", "enrollmentDate": "2026-10-02" },
+  { "id": "e5", "studentId": "5", "courseId": "c3", "grade": "D", "enrollmentDate": "2026-10-03" },
+  { "id": "e6", "studentId": "6", "courseId": "c3", "grade": "A", "enrollmentDate": "2026-10-03" },
+  { "id": "e7", "studentId": "7", "courseId": "c4", "grade": "B", "enrollmentDate": "2026-10-04" },
+  { "id": "e8", "studentId": "8", "courseId": "c4", "grade": "C", "enrollmentDate": "2026-10-04" },
+  { "id": "e9", "studentId": "9", "courseId": "c5", "grade": "D", "enrollmentDate": "2026-10-05" },
+  { "id": "e10", "studentId": "10", "courseId": "c5", "grade": "F", "enrollmentDate": "2026-10-05" }
 ]
