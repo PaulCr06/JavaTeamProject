@@ -1,0 +1,12 @@
+[
+  { "id": "ta1", "courseId": "c1", "staffID": "t1", "managing": "COURSE_MANAGER" },
+  { "id": "ta2", "courseId": "c1", "staffID": "a1", "managing": "LAB_ASSISTANT" },
+  { "id": "ta3", "courseId": "c2", "staffID": "t2", "managing": "COURSE_MANAGER" },
+  { "id": "ta4", "courseId": "c2", "staffID": "a2", "managing": "LAB_ASSISTANT" },
+  { "id": "ta5", "courseId": "c3", "staffID": "t3", "managing": "COURSE_MANAGER" },
+  { "id": "ta6", "courseId": "c3", "staffID": "a3", "managing": "LAB_ASSISTANT" },
+  { "id": "ta7", "courseId": "c4", "staffID": "t4", "managing": "COURSE_MANAGER" },
+  { "id": "ta8", "courseId": "c4", "staffID": "a4", "managing": "LAB_ASSISTANT" },
+  { "id": "ta9", "courseId": "c5", "staffID": "t5", "managing": "COURSE_MANAGER" },
+  { "id": "ta10", "courseId": "c5", "staffID": "a5", "managing": "LAB_ASSISTANT" }
+]

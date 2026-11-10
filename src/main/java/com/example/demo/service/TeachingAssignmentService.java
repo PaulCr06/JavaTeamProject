@@ -22,13 +22,6 @@ public class TeachingAssignmentService {
         return assignmentRepository.findAll();
     }
 
-    public List<TeachingAssignment> getAssignmentsByCourseId(String courseId) {
-        return assignmentRepository.findByCourseId(courseId);
-    }
-
-    public List<TeachingAssignment> getAssignmentsByStaffId(String staffId) {
-        return assignmentRepository.findByStaffId(staffId);
-    }
 
     public TeachingAssignment getAssignmentById(String id) {
         return assignmentRepository.findById(id);

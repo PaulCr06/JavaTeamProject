@@ -4,4 +4,8 @@ import com.example.demo.model.Teacher;
 import org.springframework.stereotype.Repository;
 
 @Repository
-public class TeacherRepository extends InMemoryRepository<Teacher, String>{}
+public class TeacherRepository extends InFileRepository<Teacher, String> {
+    public TeacherRepository() {
+        super("src/main/resources/data/teacher.json", Teacher.class);
+    }
+}
