@@ -1,0 +1,14 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Teacher Details</title></head>
+<body>
+<h1>Teacher Details</h1>
+<p>ID: <span th:text="${teacher.id}"></span></p>
+<p>Name: <span th:text="${teacher.name}"></span></p>
+<p>Title: <span th:text="${teacher.title}"></span></p>
+<p>Department ID: <span th:text="${teacher.departmentId}"></span></p>
+<p>Email: <span th:text="${teacher.email}"></span></p>
+<p>Hire Date: <span th:text="${teacher.hireDate}"></span></p>
+<a th:href="@{/teacher}">Back to list</a>
+</body>
+</html>

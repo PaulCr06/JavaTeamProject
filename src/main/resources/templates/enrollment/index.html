@@ -27,6 +27,9 @@
     <td th:text="${item.grade}">10</td>
     <td th:text="${item.enrollmentDate}">Date</td>
     <td>
+      <form th:action="@{/enrollment/{id}(id=${item.id})}" method="get">
+        <button type="submit">Details</button>
+      </form>
       <form th:action="@{'/enrollment/' + ${item.id} + '/delete'}" method="post">
         <button type="submit">Delete</button>
       </form>

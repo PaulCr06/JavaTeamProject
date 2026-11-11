@@ -25,6 +25,9 @@
         <td th:text="${item.birthDate}">Date</td>
         <td th:text="${item.email}">Email</td>
         <td>
+            <form th:action="@{/student/{id}(id=${item.id})}" method="get">
+                <button type="submit">Details</button>
+            </form>
             <form th:action="@{'/student/' + ${item.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>

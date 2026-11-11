@@ -25,6 +25,9 @@
         <td th:text="${item.capacity}">Capacity</td>
         <td th:text="${#lists.size(item.courses)}">0</td>
         <td>
+            <form th:action="@{/room/{id}(id=${item.id})}" method="get">
+                <button type="submit">Details</button>
+            </form>
             <form th:action="@{'/room/' + ${item.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>

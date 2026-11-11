@@ -1,9 +1,11 @@
 package com.example.demo.controller;
 import com.example.demo.model.Student;
 import com.example.demo.service.StudentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class StudentController {
@@ -17,6 +19,16 @@ public class StudentController {
     public String getAllStudents(Model model){
         model.addAttribute("students",studentService.findAllStudents());
         return "student/index";
+    }
+
+    @GetMapping("/student/{id}")
+    public String getStudent(@PathVariable String id, Model model){
+        Student student = studentService.findStudentById(id);
+        if (student == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("student", student);
+        return "student/details";
     }
 
     @GetMapping("/student/new")

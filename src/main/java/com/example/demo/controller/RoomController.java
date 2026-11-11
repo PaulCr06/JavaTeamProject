@@ -3,12 +3,14 @@ package com.example.demo.controller;
 
 import com.example.demo.model.Room;
 import com.example.demo.service.RoomService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class RoomController {
@@ -22,6 +24,16 @@ public class RoomController {
     public String getAllRooms(Model model) {
         model.addAttribute("rooms", roomService.getRooms());
         return "Room/index";
+    }
+
+    @GetMapping("/room/{id}")
+    public String getRoom(@PathVariable String id, Model model) {
+        Room room = roomService.getRoom(id);
+        if (room == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("room", room);
+        return "Room/details";
     }
 
     @GetMapping("/room/new")

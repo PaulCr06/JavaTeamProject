@@ -3,9 +3,11 @@ package com.example.demo.controller;
 import com.example.demo.model.Enrollment;
 import com.example.demo.model.Grade;
 import com.example.demo.service.EnrollmentService;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class EnrollmentController {
@@ -19,6 +21,16 @@ public class EnrollmentController {
     public String getAllEnrollments(Model model){
         model.addAttribute("enrollments", enrollmentService.getAllEnrollments());
         return "enrollment/index";
+    }
+
+    @GetMapping("/enrollment/{id}")
+    public String getEnrollment(@PathVariable String id, Model model){
+        Enrollment enrollment = enrollmentService.getEnrollmentById(id);
+        if (enrollment == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("enrollment", enrollment);
+        return "enrollment/details";
     }
 
     @GetMapping("/enrollment/new")

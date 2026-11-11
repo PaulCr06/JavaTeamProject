@@ -1,0 +1,13 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>University Details</title></head>
+<body>
+<h1>University Details</h1>
+<p>ID: <span th:text="${university.id}"></span></p>
+<p>Name: <span th:text="${university.name}"></span></p>
+<p>City: <span th:text="${university.city}"></span></p>
+<p>Departments: <span th:text="${#lists.size(university.departments)}"></span></p>
+<p>Rooms: <span th:text="${#lists.size(university.rooms)}"></span></p>
+<a th:href="@{/university}">Back to list</a>
+</body>
+</html>

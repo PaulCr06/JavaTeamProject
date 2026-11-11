@@ -11,12 +11,14 @@ import com.example.demo.service.CourseService;
 
 import java.util.List;
 
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.ModelAttribute;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 
@@ -32,6 +34,17 @@ public class CourseController {
         model.addAttribute("courses",courseService.getAllCourses());
         return "Course/index";
     }
+
+    @GetMapping("/courses/{id}")
+    public String getCourse(@PathVariable String id, Model model){
+        Course course = courseService.getCourse(id);
+        if (course == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("course", course);
+        return "Course/details";
+    }
+
     @GetMapping("/courses/new")
     public String showCreateForm(Model model){
         model.addAttribute("course",new Course());

@@ -1,0 +1,12 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Department Details</title></head>
+<body>
+<h1>Department Details</h1>
+<p>ID: <span th:text="${department.id}"></span></p>
+<p>Name: <span th:text="${department.name}"></span></p>
+<p>Courses: <span th:text="${#lists.size(department.courses)}"></span></p>
+<p>Teachers: <span th:text="${#lists.size(department.teachers)}"></span></p>
+<a th:href="@{/department}">Back to list</a>
+</body>
+</html>

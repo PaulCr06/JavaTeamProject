@@ -15,6 +15,7 @@
         <th>Name</th>
         <th>Courses </th>
         <th>Teachers</th>
+        <th>Actions</th>
         
     </tr>
     </thead>
@@ -24,8 +25,10 @@
         <td th:text="${item.name}">Name</td>
         <td th:text="${item.courses}">Courses</td>
         <td th:text="${item.teachers}">Teachers</td>
-       
         <td>
+            <form th:action="@{/department/{id}(id=${item.id})}" method="get">
+                <button type="submit">Details</button>
+            </form>
             <form th:action="@{'/department/' + ${item.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>

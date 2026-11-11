@@ -1,0 +1,15 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head><title>Course Details</title></head>
+<body>
+<h1>Course Details</h1>
+<p>ID: <span th:text="${course.id}"></span></p>
+<p>Title: <span th:text="${course.title}"></span></p>
+<p>Credits: <span th:text="${course.credits}"></span></p>
+<p>Department ID: <span th:text="${course.departmentId}"></span></p>
+<p>Room ID: <span th:text="${course.roomId}"></span></p>
+<p>Enrollments: <span th:text="${#lists.size(course.enrollments)}"></span></p>
+<p>Assignments: <span th:text="${#lists.size(course.assignments)}"></span></p>
+<a th:href="@{/courses}">Back to list</a>
+</body>
+</html>

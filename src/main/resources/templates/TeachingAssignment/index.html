@@ -25,6 +25,9 @@
         <td th:text="${item.staffId}">S1</td>
         <td th:text="${item.managing}">ROLE</td>
         <td>
+            <form th:action="@{/teachingassignment/{id}(id=${item.id})}" method="get">
+                <button type="submit">Details</button>
+            </form>
             <form th:action="@{'/teachingassignment/' + ${item.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>
