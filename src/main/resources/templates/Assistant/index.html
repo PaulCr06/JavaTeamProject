@@ -26,6 +26,9 @@
             <form th:action="@{/assistant/{id}(id=${item.id})}" method="get">
                 <button type="submit">Details</button>
             </form>
+            <form th:action="@{/assistant/{id}/edit(id=${item.id})}" method="get">
+                <button type="submit">Update</button>
+            </form>
             <form th:action="@{'/assistant/' + ${item.id} + '/delete'}" method="post">
                 <button type="submit">Delete</button>
             </form>

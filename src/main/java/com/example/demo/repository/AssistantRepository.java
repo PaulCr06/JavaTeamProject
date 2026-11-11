@@ -9,5 +9,4 @@ public class AssistantRepository extends InFileRepository<Assistant, String> {
     public AssistantRepository(){
         super("src/main/resources/data/assistant.json", Assistant.class);
     }
-
 }

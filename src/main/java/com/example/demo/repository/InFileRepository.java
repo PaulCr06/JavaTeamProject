@@ -66,6 +66,17 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
     }
 
     @Override
+    public T update(T entity) {
+        loadFromFile();
+        if (!repositoryMap.containsKey(entity.getId())) {
+            return null;
+        }
+        repositoryMap.put(entity.getId(), entity);
+        saveToFile();
+        return entity;
+    }
+
+    @Override
     public List<T> findAll() {
         loadFromFile();
         return new ArrayList<>(repositoryMap.values());

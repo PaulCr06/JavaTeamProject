@@ -39,6 +39,19 @@ public class AssistantController {
     public String showCreateForm(Model model) {
         model.addAttribute("assistant", new Assistant());
         model.addAttribute("roleTypes",Roles.values());
+        model.addAttribute("isUpdate", false);
+        return "Assistant/form";
+    }
+
+    @GetMapping("/assistant/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Assistant assistant = assistantService.getAssistantById(id);
+        if (assistant == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("assistant", assistant);
+        model.addAttribute("roleTypes", Roles.values());
+        model.addAttribute("isUpdate", true);
         return "Assistant/form";
     }
 
@@ -47,6 +60,15 @@ public class AssistantController {
         
         assistantService.saveAssistant(assistant);
     
+        return "redirect:/assistant";
+    }
+
+    @PostMapping("/assistant/{id}")
+    public String updateAssistant(@PathVariable String id, @ModelAttribute Assistant assistant) {
+        assistant.setId(id);
+        if (assistantService.updateAssistant(assistant) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         return "redirect:/assistant";
     }
 

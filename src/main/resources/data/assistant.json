@@ -1,12 +1,51 @@
-[
-  { "id": "a1", "name": "Muresan Vlad", "role": "TA" },
-  { "id": "a2", "name": "Popa Ioan", "role": "Lab" },
-  { "id": "a3", "name": "Ilie Ana", "role": "Grader" },
-  { "id": "a4", "name": "Stoica Radu", "role": "Lab" },
-  { "id": "a5", "name": "Diaconu Elena", "role": "TA" },
-  { "id": "a6", "name": "Costea Mihai", "role": "Lab" },
-  { "id": "a7", "name": "Badea Florin", "role": "Grader" },
-  { "id": "a8", "name": "Manea Alina", "role": "TA" },
-  { "id": "a9", "name": "Oprea Stefan", "role": "Lab" },
-  { "id": "a10", "name": "Nistor Laura", "role": "TA" }
-]
+[ {
+  "id" : "a1",
+  "name" : "Muresan Vladimir",
+  "assignments" : [ ],
+  "role" : "TA"
+}, {
+  "id" : "a2",
+  "name" : "Popa Ioan",
+  "assignments" : [ ],
+  "role" : "Lab"
+}, {
+  "id" : "a10",
+  "name" : "Nistor Laura",
+  "assignments" : [ ],
+  "role" : "TA"
+}, {
+  "id" : "a3",
+  "name" : "Ilie Ana",
+  "assignments" : [ ],
+  "role" : "Grader"
+}, {
+  "id" : "a4",
+  "name" : "Stoica Radu",
+  "assignments" : [ ],
+  "role" : "Lab"
+}, {
+  "id" : "a5",
+  "name" : "Diaconu Elena",
+  "assignments" : [ ],
+  "role" : "TA"
+}, {
+  "id" : "a6",
+  "name" : "Costea Mihai",
+  "assignments" : [ ],
+  "role" : "Lab"
+}, {
+  "id" : "a7",
+  "name" : "Badea Florin",
+  "assignments" : [ ],
+  "role" : "Grader"
+}, {
+  "id" : "a8",
+  "name" : "Manea Alina",
+  "assignments" : [ ],
+  "role" : "TA"
+}, {
+  "id" : "a9",
+  "name" : "Oprea Stefan",
+  "assignments" : [ ],
+  "role" : "Lab"
+} ]

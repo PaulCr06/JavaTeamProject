@@ -17,6 +17,9 @@ public class AssistantService {
     public Assistant saveAssistant(Assistant assistant) {
         return assistantRepository.save(assistant);
     }
+    public Assistant updateAssistant(Assistant assistant) {
+        return assistantRepository.update(assistant);
+    }
 
     public List<Assistant> getAllAssistants() {
         return assistantRepository.findAll();
