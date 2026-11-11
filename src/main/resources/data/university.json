@@ -1,1 +1,12 @@
-[]
+[
+  { "id": "u1", "name": "North Valley University", "city": "Cluj-Napoca", "departments": [], "rooms": [] },
+  { "id": "u2", "name": "Transylvania Institute of Technology", "city": "Brasov", "departments": [], "rooms": [] },
+  { "id": "u3", "name": "Central European University of Science", "city": "Sibiu", "departments": [], "rooms": [] },
+  { "id": "u4", "name": "Riverside State University", "city": "Oradea", "departments": [], "rooms": [] },
+  { "id": "u5", "name": "Carpathian Polytechnic University", "city": "Iasi", "departments": [], "rooms": [] },
+  { "id": "u6", "name": "Western Plains University", "city": "Timisoara", "departments": [], "rooms": [] },
+  { "id": "u7", "name": "Danube Technical University", "city": "Galati", "departments": [], "rooms": [] },
+  { "id": "u8", "name": "Green Hills University", "city": "Targu Mures", "departments": [], "rooms": [] },
+  { "id": "u9", "name": "Eastern Academic University", "city": "Suceava", "departments": [], "rooms": [] },
+  { "id": "u10", "name": "Blue Lake University", "city": "Alba Iulia", "departments": [], "rooms": [] }
+]

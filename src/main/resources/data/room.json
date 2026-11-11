@@ -1,1 +1,12 @@
-[]
+[
+  { "id": "r1", "capacity": 120, "number": "A101", "courses": [] },
+  { "id": "r2", "capacity": 80, "number": "A102", "courses": [] },
+  { "id": "r3", "capacity": 60, "number": "B201", "courses": [] },
+  { "id": "r4", "capacity": 50, "number": "B202", "courses": [] },
+  { "id": "r5", "capacity": 100, "number": "C101", "courses": [] },
+  { "id": "r6", "capacity": 40, "number": "C102", "courses": [] },
+  { "id": "r7", "capacity": 70, "number": "D201", "courses": [] },
+  { "id": "r8", "capacity": 35, "number": "D202", "courses": [] },
+  { "id": "r9", "capacity": 90, "number": "E101", "courses": [] },
+  { "id": "r10", "capacity": 45, "number": "E102", "courses": [] }
+]

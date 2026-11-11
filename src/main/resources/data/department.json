@@ -1,1 +1,12 @@
-[]
+[
+  { "id": "dep1", "name": "Computer Science", "courses": [], "teachers": [] },
+  { "id": "dep2", "name": "Data Science", "courses": [], "teachers": [] },
+  { "id": "dep3", "name": "Information Systems", "courses": [], "teachers": [] },
+  { "id": "dep4", "name": "Computer Engineering", "courses": [], "teachers": [] },
+  { "id": "dep5", "name": "Applied Mathematics", "courses": [], "teachers": [] },
+  { "id": "dep6", "name": "Software Engineering", "courses": [], "teachers": [] },
+  { "id": "dep7", "name": "Statistics", "courses": [], "teachers": [] },
+  { "id": "dep8", "name": "Artificial Intelligence", "courses": [], "teachers": [] },
+  { "id": "dep9", "name": "Digital Media", "courses": [], "teachers": [] },
+  { "id": "dep10", "name": "Cybersecurity", "courses": [], "teachers": [] }
+]

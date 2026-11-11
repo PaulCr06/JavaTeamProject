@@ -1,1 +1,12 @@
-[]
+[
+  { "id": "c1", "title": "Introduction to Programming", "credits": 6, "departmentId": "dep1", "roomId": "r1", "enrollments": [], "assignments": [] },
+  { "id": "c2", "title": "Data Structures", "credits": 5, "departmentId": "dep2", "roomId": "r2", "enrollments": [], "assignments": [] },
+  { "id": "c3", "title": "Database Systems", "credits": 5, "departmentId": "dep3", "roomId": "r3", "enrollments": [], "assignments": [] },
+  { "id": "c4", "title": "Computer Networks", "credits": 5, "departmentId": "dep4", "roomId": "r4", "enrollments": [], "assignments": [] },
+  { "id": "c5", "title": "Operating Systems", "credits": 6, "departmentId": "dep5", "roomId": "r5", "enrollments": [], "assignments": [] },
+  { "id": "c6", "title": "Software Engineering", "credits": 5, "departmentId": "dep6", "roomId": "r6", "enrollments": [], "assignments": [] },
+  { "id": "c7", "title": "Discrete Mathematics", "credits": 4, "departmentId": "dep7", "roomId": "r7", "enrollments": [], "assignments": [] },
+  { "id": "c8", "title": "Artificial Intelligence", "credits": 5, "departmentId": "dep8", "roomId": "r8", "enrollments": [], "assignments": [] },
+  { "id": "c9", "title": "Web Development", "credits": 4, "departmentId": "dep9", "roomId": "r9", "enrollments": [], "assignments": [] },
+  { "id": "c10", "title": "Information Security", "credits": 5, "departmentId": "dep10", "roomId": "r10", "enrollments": [], "assignments": [] }
+]
