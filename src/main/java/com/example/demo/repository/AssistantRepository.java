@@ -7,7 +7,7 @@ import org.springframework.stereotype.Repository;
 public class AssistantRepository extends InFileRepository<Assistant, String> {
 
     public AssistantRepository(){
-        super("scr/main/resources/data/assistant.json", Assistant.class);
+        super("src/main/resources/data/assistant.json", Assistant.class);
     }
 
 }

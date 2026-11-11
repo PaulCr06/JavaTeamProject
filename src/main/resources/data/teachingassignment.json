@@ -1,12 +1,12 @@
 [
-  { "id": "ta1", "courseId": "c1", "staffID": "t1", "managing": "COURSE" },
-  { "id": "ta2", "courseId": "c1", "staffID": "a1", "managing": "LAB" },
-  { "id": "ta3", "courseId": "c2", "staffID": "t2", "managing": "COURSE" },
-  { "id": "ta4", "courseId": "c2", "staffID": "a2", "managing": "LAB" },
-  { "id": "ta5", "courseId": "c3", "staffID": "t3", "managing": "COURSE" },
-  { "id": "ta6", "courseId": "c3", "staffID": "a3", "managing": "LAB" },
-  { "id": "ta7", "courseId": "c4", "staffID": "t4", "managing": "SEMINARY" },
-  { "id": "ta8", "courseId": "c4", "staffID": "a4", "managing": "LAB" },
-  { "id": "ta9", "courseId": "c5", "staffID": "t5", "managing": "SEMINARY" },
-  { "id": "ta10", "courseId": "c5", "staffID": "a5", "managing": "LAB" }
+  { "id": "ta1", "courseId": "c1", "staffId": "t1", "managing": "Course" },
+  { "id": "ta2", "courseId": "c1", "staffId": "a1", "managing": "Lab" },
+  { "id": "ta3", "courseId": "c2", "staffId": "t2", "managing": "Course" },
+  { "id": "ta4", "courseId": "c2", "staffId": "a2", "managing": "Lab" },
+  { "id": "ta5", "courseId": "c3", "staffId": "t3", "managing": "Course" },
+  { "id": "ta6", "courseId": "c3", "staffId": "a3", "managing": "Lab" },
+  { "id": "ta7", "courseId": "c4", "staffId": "t4", "managing": "Seminary" },
+  { "id": "ta8", "courseId": "c4", "staffId": "a4", "managing": "Lab" },
+  { "id": "ta9", "courseId": "c5", "staffId": "t5", "managing": "Seminary" },
+  { "id": "ta10", "courseId": "c5", "staffId": "a5", "managing": "Lab" }
 ]

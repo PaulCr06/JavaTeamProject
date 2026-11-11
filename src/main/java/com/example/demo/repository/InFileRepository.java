@@ -7,6 +7,7 @@ import com.fasterxml.jackson.databind.type.CollectionType;
 
 import java.io.File;
 import java.io.IOException;
+import java.io.UncheckedIOException;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.List;
@@ -29,6 +30,7 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
     }
 
     private void loadFromFile(){
+        repositoryMap.clear();
         File file = new File(filePath);
         if(!file.exists()){
             return;
@@ -41,7 +43,7 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
             }
         }
         catch (IOException e){
-            e.printStackTrace();
+            throw new UncheckedIOException("Could not load repository data from " + filePath, e);
         }
     }
 
@@ -51,28 +53,34 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
             file.getParentFile().mkdirs();
             objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, repositoryMap.values());
         } catch (IOException e) {
-            e.printStackTrace();
+            throw new UncheckedIOException("Could not save repository data to " + filePath, e);
         }
     }
 
     @Override
     public T save(T entity) {
+        loadFromFile();
         repositoryMap.put(entity.getId(), entity);
+        saveToFile();
         return entity;
     }
 
     @Override
     public List<T> findAll() {
+        loadFromFile();
         return new ArrayList<>(repositoryMap.values());
     }
 
     @Override
     public T findById(ID id) {
+        loadFromFile();
         return repositoryMap.get(id);
     }
 
     @Override
     public void delete(ID id) {
+        loadFromFile();
         repositoryMap.remove(id);
+        saveToFile();
     }
 }
