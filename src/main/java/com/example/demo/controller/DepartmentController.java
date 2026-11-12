@@ -37,9 +37,22 @@ public class DepartmentController {
     @GetMapping("/department/new")
     public String showCreateForm(Model model){
         model.addAttribute("department",new Department());
+        model.addAttribute("isUpdate", false);
         return "Department/form";
 
     }
+
+    @GetMapping("/department/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Department department = departmentService.getDepartmentById(id);
+        if (department == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("department", department);
+        model.addAttribute("isUpdate", true);
+        return "Department/form";
+    }
+
     @PostMapping("/department")
     public String saveDepartment(@ModelAttribute Department department){
             departmentService.saveDepartment(department);

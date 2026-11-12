@@ -39,6 +39,18 @@ public class RoomController {
     @GetMapping("/room/new")
     public String showCreateForm(Model model) {
         model.addAttribute("room", new Room());
+        model.addAttribute("isUpdate", false);
+        return "Room/form";
+    }
+
+    @GetMapping("/room/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Room room = roomService.getRoom(id);
+        if (room == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("room", room);
+        model.addAttribute("isUpdate", true);
         return "Room/form";
     }
 

@@ -39,6 +39,18 @@ public class UniversityController {
     @GetMapping("/university/new")
     public String showCreateForm(Model model) {
         model.addAttribute("university", new University());
+        model.addAttribute("isUpdate", false);
+        return "University/form";
+    }
+
+    @GetMapping("/university/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        University university = universityService.getUniversityById(id);
+        if (university == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("university", university);
+        model.addAttribute("isUpdate", true);
         return "University/form";
     }
 

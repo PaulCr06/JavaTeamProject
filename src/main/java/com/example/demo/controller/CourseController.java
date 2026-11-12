@@ -48,8 +48,21 @@ public class CourseController {
     @GetMapping("/courses/new")
     public String showCreateForm(Model model){
         model.addAttribute("course",new Course());
+        model.addAttribute("isUpdate", false);
         return "Course/form";
     }
+
+    @GetMapping("/courses/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Course course = courseService.getCourse(id);
+        if (course == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("course", course);
+        model.addAttribute("isUpdate", true);
+        return "Course/form";
+    }
+
     @PostMapping("/courses")
     public String saveCourse(@ModelAttribute  Course course) {
         courseService.saveCourse(course);
