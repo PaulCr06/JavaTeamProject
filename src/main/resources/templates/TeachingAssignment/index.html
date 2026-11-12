@@ -22,7 +22,7 @@
     <tr th:each="item : ${assignments}">
         <td th:text="${item.id}">ID</td>
         <td th:text="${item.courseId}">Course ID</td>
-        <td th:text="${item.staffID}">Staff ID</td>
+        <td th:text="${item.staffId}">Staff ID</td>
         <td th:text="${item.managing}">Role</td>
         <td>
             <form th:action="@{/teachingassignment/{id}(id=${item.id})}" method="get" style="display:inline;">

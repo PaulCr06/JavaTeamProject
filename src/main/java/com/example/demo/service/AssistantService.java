@@ -36,7 +36,7 @@ public class AssistantService {
     public void deleteAssistant(String id) {
         for(TeachingAssignment assignment : teachingAssignmentRepository.findAll()){
             if(id.equals(assignment.getStaffId())){
-                assistantRepository.delete(assignment.getId());
+                teachingAssignmentRepository.delete(assignment.getId());
             }
         }
         assistantRepository.delete(id);

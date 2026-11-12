@@ -29,31 +29,31 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
         loadFromFile();
     }
 
-    private void loadFromFile(){
+    private void loadFromFile() {
         repositoryMap.clear();
+
         File file = new File(filePath);
-        if(!file.exists()){
+        if (!file.exists()) {
             return;
         }
-        try{
-            CollectionType listType = objectMapper.getTypeFactory().constructCollectionType(List.class, entityClass);
-            List<T> entities = objectMapper.readValue(file, listType);
-            for(T entity : entities){
-                repositoryMap.put(entity.getId(), entity);
+
+        try {
+            List<T> list = objectMapper.readerForListOf(entityClass).readValue(file);
+            for (T item : list) {
+                repositoryMap.put(item.getId(), item);
             }
-        }
-        catch (IOException e){
-            throw new UncheckedIOException("Could not load repository data from " + filePath, e);
+        } catch (IOException e) {
+            throw new UncheckedIOException("Could not load file: " + filePath, e);
         }
     }
 
     private void saveToFile() {
+        File file = new File(filePath);
+
         try {
-            File file = new File(filePath);
-            file.getParentFile().mkdirs();
-            objectMapper.writerWithDefaultPrettyPrinter().writeValue(file, repositoryMap.values());
+            objectMapper.writeValue(file, repositoryMap.values());
         } catch (IOException e) {
-            throw new UncheckedIOException("Could not save repository data to " + filePath, e);
+            throw new UncheckedIOException("Could not save to file: " + filePath, e);
         }
     }
 
