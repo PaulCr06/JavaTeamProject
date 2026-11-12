@@ -1,18 +1,24 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Teacher</title>
+    <title th:text="${isUpdate} ? 'Update Teacher' : 'Add Teacher'">Teacher</title>
 </head>
 <body>
-<!--/*@thymesVar id="teacher" type="com.example.demo.model.Teacher"*/-->
-<h1>Add a New Teacher</h1>
+<h1 th:text="${isUpdate} ? 'Update Teacher' : 'Add a New Teacher'">Teacher</h1>
 
 <form th:action="@{/teacher}" th:object="${teacher}" method="post">
+
     <label>ID:</label>
-    <input type="text" th:field="*{id}" required /><br><br>
+    <input type="text" th:field="*{id}" th:readonly="${isUpdate}" required /><br><br>
 
     <label>Name:</label>
     <input type="text" th:field="*{name}" required /><br><br>
+
+    <label>Title:</label>
+    <input type="text" th:field="*{title}" required /><br><br>
+
+    <label>Department ID:</label>
+    <input type="text" th:field="*{departmentId}" required /><br><br>
 
     <label>Email:</label>
     <input type="email" th:field="*{email}" required /><br><br>
