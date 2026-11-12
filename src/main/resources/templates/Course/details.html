@@ -1,15 +1,56 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Course Details</title></head>
+<head>
+    <title>Course Details</title>
+</head>
 <body>
 <h1>Course Details</h1>
+
 <p>ID: <span th:text="${course.id}"></span></p>
 <p>Title: <span th:text="${course.title}"></span></p>
 <p>Credits: <span th:text="${course.credits}"></span></p>
 <p>Department ID: <span th:text="${course.departmentId}"></span></p>
 <p>Room ID: <span th:text="${course.roomId}"></span></p>
-<p>Enrollments: <span th:text="${#lists.size(course.enrollments)}"></span></p>
-<p>Assignments: <span th:text="${#lists.size(course.assignments)}"></span></p>
+
+<h2>Enrollments</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Enrollment ID</th>
+        <th>Student ID</th>
+        <th>Grade</th>
+        <th>Enrollment Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="enrollment : ${course.enrollments}">
+        <td th:text="${enrollment.id}">ID</td>
+        <td th:text="${enrollment.studentId}">Student ID</td>
+        <td th:text="${enrollment.grade}">Grade</td>
+        <td th:text="${enrollment.enrollmentDate}">Date</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Teaching Assignments</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Assignment ID</th>
+        <th>Staff ID</th>
+        <th>Managing Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="assignment : ${course.assignments}">
+        <td th:text="${assignment.id}">ID</td>
+        <td th:text="${assignment.staffId}">Staff ID</td>
+        <td th:text="${assignment.managing}">Role</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/courses}">Back to list</a>
 </body>
 </html>

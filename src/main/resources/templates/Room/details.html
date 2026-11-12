@@ -1,12 +1,34 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Room Details</title></head>
+<head>
+    <title>Room Details</title>
+</head>
 <body>
 <h1>Room Details</h1>
+
 <p>ID: <span th:text="${room.id}"></span></p>
 <p>Number: <span th:text="${room.number}"></span></p>
 <p>Capacity: <span th:text="${room.capacity}"></span></p>
-<p>Courses: <span th:text="${#lists.size(room.courses)}"></span></p>
+
+<h2>Courses in this Room</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Course ID</th>
+        <th>Title</th>
+        <th>Credits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${room.courses}">
+        <td th:text="${course.id}">ID</td>
+        <td th:text="${course.title}">Title</td>
+        <td th:text="${course.credits}">Credits</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/room}">Back to list</a>
 </body>
 </html>

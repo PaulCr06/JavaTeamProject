@@ -14,7 +14,6 @@
         <th>ID</th>
         <th>Number</th>
         <th>Capacity</th>
-        <th>Courses</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -23,12 +22,14 @@
         <td th:text="${item.id}">ID</td>
         <td th:text="${item.number}">Number</td>
         <td th:text="${item.capacity}">Capacity</td>
-        <td th:text="${#lists.size(item.courses)}">0</td>
         <td>
-            <form th:action="@{/room/{id}(id=${item.id})}" method="get">
+            <form th:action="@{/room/{id}(id=${item.id})}" method="get" style="display:inline;">
                 <button type="submit">Details</button>
             </form>
-            <form th:action="@{'/room/' + ${item.id} + '/delete'}" method="post">
+            <form th:action="@{/room/{id}/edit(id=${item.id})}" method="get" style="display:inline;">
+                <button type="submit">Update</button>
+            </form>
+            <form th:action="@{'/room/' + ${item.id} + '/delete'}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
         </td>

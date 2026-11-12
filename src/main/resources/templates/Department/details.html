@@ -1,12 +1,53 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Department Details</title></head>
+<head>
+    <title>Department Details</title>
+</head>
 <body>
 <h1>Department Details</h1>
+
 <p>ID: <span th:text="${department.id}"></span></p>
 <p>Name: <span th:text="${department.name}"></span></p>
-<p>Courses: <span th:text="${#lists.size(department.courses)}"></span></p>
-<p>Teachers: <span th:text="${#lists.size(department.teachers)}"></span></p>
+
+<h2>Courses in Department</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Course ID</th>
+        <th>Title</th>
+        <th>Credits</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="course : ${department.courses}">
+        <td th:text="${course.id}">ID</td>
+        <td th:text="${course.title}">Title</td>
+        <td th:text="${course.credits}">Credits</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Teachers in Department</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Teacher ID</th>
+        <th>Name</th>
+        <th>Title</th>
+        <th>Email</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="teacher : ${department.teachers}">
+        <td th:text="${teacher.id}">ID</td>
+        <td th:text="${teacher.name}">Name</td>
+        <td th:text="${teacher.title}">Title</td>
+        <td th:text="${teacher.email}">Email</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/department}">Back to list</a>
 </body>
 </html>

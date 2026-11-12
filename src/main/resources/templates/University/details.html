@@ -1,13 +1,50 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>University Details</title></head>
+<head>
+    <title>University Details</title>
+</head>
 <body>
 <h1>University Details</h1>
+
 <p>ID: <span th:text="${university.id}"></span></p>
 <p>Name: <span th:text="${university.name}"></span></p>
 <p>City: <span th:text="${university.city}"></span></p>
-<p>Departments: <span th:text="${#lists.size(university.departments)}"></span></p>
-<p>Rooms: <span th:text="${#lists.size(university.rooms)}"></span></p>
+
+<h2>Departments</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Department ID</th>
+        <th>Name</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="dept : ${university.departments}">
+        <td th:text="${dept.id}">ID</td>
+        <td th:text="${dept.name}">Name</td>
+    </tr>
+    </tbody>
+</table>
+
+<h2>Rooms</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Room ID</th>
+        <th>Number</th>
+        <th>Capacity</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="room : ${university.rooms}">
+        <td th:text="${room.id}">ID</td>
+        <td th:text="${room.number}">Number</td>
+        <td th:text="${room.capacity}">Capacity</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/university}">Back to list</a>
 </body>
 </html>
