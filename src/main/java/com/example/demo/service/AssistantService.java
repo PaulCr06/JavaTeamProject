@@ -1,7 +1,9 @@
 package com.example.demo.service;
 
 import com.example.demo.model.Assistant;
+import com.example.demo.model.TeachingAssignment;
 import com.example.demo.repository.AssistantRepository;
+import com.example.demo.repository.TeachingAssignmentRepository;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -9,8 +11,10 @@ import java.util.List;
 @Service
 public class AssistantService {
     private final AssistantRepository assistantRepository;
+    private final TeachingAssignmentRepository teachingAssignmentRepository;
 
-    public AssistantService(AssistantRepository assistantRepository) {
+    public AssistantService(AssistantRepository assistantRepository, TeachingAssignmentRepository teachingAssignmentRepository) {
+        this.teachingAssignmentRepository = teachingAssignmentRepository;
         this.assistantRepository = assistantRepository;
     }
 
@@ -30,6 +34,11 @@ public class AssistantService {
     }
 
     public void deleteAssistant(String id) {
+        for(TeachingAssignment assignment : teachingAssignmentRepository.findAll()){
+            if(id.equals(assignment.getStaffId())){
+                assistantRepository.delete(assignment.getId());
+            }
+        }
         assistantRepository.delete(id);
     }
 }
