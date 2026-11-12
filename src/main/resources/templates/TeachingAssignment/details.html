@@ -1,12 +1,16 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Teaching Assignment Details</title></head>
+<head>
+    <title>Assignment Details</title>
+</head>
 <body>
-<h1>Teaching Assignment Details</h1>
-<p>ID: <span th:text="${assignment.id}"></span></p>
-<p>Course ID: <span th:text="${assignment.courseId}"></span></p>
-<p>Staff ID: <span th:text="${assignment.staffId}"></span></p>
-<p>Managing Role: <span th:text="${assignment.managing}"></span></p>
+<h1>Assignment Details</h1>
+
+<p>ID: <span th:text="${teachingAssignment.id}"></span></p>
+<p>Course ID: <span th:text="${teachingAssignment.courseId}"></span></p>
+<p>Staff ID: <span th:text="${teachingAssignment.staffID}"></span></p>
+<p>Managing Role: <span th:text="${teachingAssignment.managing}"></span></p>
+
 <a th:href="@{/teachingassignment}">Back to list</a>
 </body>
 </html>

@@ -21,16 +21,19 @@
   </thead>
   <tbody>
   <tr th:each="item : ${enrollments}">
-    <td th:text="${item.id}">1</td>
-    <td th:text="${item.studentId}">S1</td>
-    <td th:text="${item.courseId}">C1</td>
-    <td th:text="${item.grade}">10</td>
+    <td th:text="${item.id}">ID</td>
+    <td th:text="${item.studentId}">Student ID</td>
+    <td th:text="${item.courseId}">Course ID</td>
+    <td th:text="${item.grade}">Grade</td>
     <td th:text="${item.enrollmentDate}">Date</td>
     <td>
-      <form th:action="@{/enrollment/{id}(id=${item.id})}" method="get">
+      <form th:action="@{/enrollment/{id}(id=${item.id})}" method="get" style="display:inline;">
         <button type="submit">Details</button>
       </form>
-      <form th:action="@{'/enrollment/' + ${item.id} + '/delete'}" method="post">
+      <form th:action="@{/enrollment/{id}/edit(id=${item.id})}" method="get" style="display:inline;">
+        <button type="submit">Update</button>
+      </form>
+      <form th:action="@{'/enrollment/' + ${item.id} + '/delete'}" method="post" style="display:inline;">
         <button type="submit">Delete</button>
       </form>
     </td>

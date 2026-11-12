@@ -1,15 +1,15 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
-    <title>Add Enrollment</title>
+    <title th:text="${isUpdate} ? 'Update Enrollment' : 'Add Enrollment'">Enrollment</title>
 </head>
 <body>
-<!--/*@thymesVar id="enrollment" type="com.example.demo.model.Enrollment"*/-->
-<h1>Add a New Enrollment</h1>
+<h1 th:text="${isUpdate} ? 'Update Enrollment' : 'Add a New Enrollment'">Enrollment</h1>
 
 <form th:action="@{/enrollment}" th:object="${enrollment}" method="post">
+
     <label>ID:</label>
-    <input type="text" th:field="*{id}" required /><br><br>
+    <input type="text" th:field="*{id}" th:readonly="${isUpdate}" required /><br><br>
 
     <label>Student ID:</label>
     <input type="text" th:field="*{studentId}" required /><br><br>
