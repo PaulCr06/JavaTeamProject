@@ -1,12 +1,35 @@
 <!DOCTYPE html>
 <html xmlns:th="http://www.thymeleaf.org">
-<head><title>Student Details</title></head>
+<head>
+    <title>Student Details</title>
+</head>
 <body>
 <h1>Student Details</h1>
+
 <p>ID: <span th:text="${student.id}"></span></p>
 <p>Name: <span th:text="${student.name}"></span></p>
-<p>Date of Birth: <span th:text="${student.birthDate}"></span></p>
 <p>Email: <span th:text="${student.email}"></span></p>
+<p>Birth Date: <span th:text="${student.birthDate}"></span></p>
+
+<h2>Enrolled Courses</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Course ID</th>
+        <th>Grade</th>
+        <th>Enrollment Date</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="enrollment : ${student.enrollments}">
+        <td th:text="${enrollment.courseId}">Course ID</td>
+        <td th:text="${enrollment.grade}">Grade</td>
+        <td th:text="${enrollment.enrollmentDate}">Date</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/student}">Back to list</a>
 </body>
 </html>

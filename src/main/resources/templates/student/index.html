@@ -13,8 +13,8 @@
     <tr>
         <th>ID</th>
         <th>Name</th>
-        <th>Date of Birth</th>
         <th>Email</th>
+        <th>Birth Date</th>
         <th>Actions</th>
     </tr>
     </thead>
@@ -22,13 +22,16 @@
     <tr th:each="item : ${students}">
         <td th:text="${item.id}">1</td>
         <td th:text="${item.name}">Name</td>
-        <td th:text="${item.birthDate}">Date</td>
         <td th:text="${item.email}">Email</td>
+        <td th:text="${item.birthDate}">Date</td>
         <td>
-            <form th:action="@{/student/{id}(id=${item.id})}" method="get">
+            <form th:action="@{/student/{id}(id=${item.id})}" method="get" style="display:inline;">
                 <button type="submit">Details</button>
             </form>
-            <form th:action="@{'/student/' + ${item.id} + '/delete'}" method="post">
+            <form th:action="@{/student/{id}/edit(id=${item.id})}" method="get" style="display:inline;">
+                <button type="submit">Update</button>
+            </form>
+            <form th:action="@{'/student/' + ${item.id} + '/delete'}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
         </td>

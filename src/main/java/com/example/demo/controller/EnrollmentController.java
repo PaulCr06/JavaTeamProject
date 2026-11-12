@@ -37,6 +37,19 @@ public class EnrollmentController {
     public String showCreateForm(Model model) {
         model.addAttribute("enrollment", new Enrollment());
         model.addAttribute("gradeTypes",Grade.values());
+        model.addAttribute("isUpdate", false);
+        return "enrollment/form";
+    }
+
+    @GetMapping("/enrollment/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Enrollment enrollment = enrollmentService.getEnrollmentById(id);
+        if (enrollment == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("enrollment", enrollment);
+        model.addAttribute("gradeTypes", Grade.values());
+        model.addAttribute("isUpdate", true);
         return "enrollment/form";
     }
 

@@ -34,6 +34,18 @@ public class StudentController {
     @GetMapping("/student/new")
     public String showCreateForm(Model model){
         model.addAttribute("student", new Student());
+        model.addAttribute("isUpdate", false);
+        return "student/form";
+    }
+
+    @GetMapping("/student/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Student student = studentService.findStudentById(id);
+        if (student == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("student", student);
+        model.addAttribute("isUpdate", true);
         return "student/form";
     }
 

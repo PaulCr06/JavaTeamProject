@@ -34,6 +34,18 @@ public class TeacherController {
     @GetMapping("/teacher/new")
     public String showCreateForm(Model model){
         model.addAttribute("teacher", new Teacher());
+        model.addAttribute("isUpdate", false);
+        return "teacher/form";
+    }
+
+    @GetMapping("/teacher/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        Teacher teacher = teacherService.getTeacherById(id);
+        if (teacher == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("teacher", teacher);
+        model.addAttribute("isUpdate", true);
         return "teacher/form";
     }
 

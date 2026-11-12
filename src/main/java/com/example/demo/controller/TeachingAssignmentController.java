@@ -37,6 +37,19 @@ public class TeachingAssignmentController {
     public String showCreateForm(Model model) {
         model.addAttribute("teachingAssignment", new TeachingAssignment());
         model.addAttribute("managingTypes", ManagingType.values());
+        model.addAttribute("isUpdate", false);
+        return "TeachingAssignment/form";
+    }
+
+    @GetMapping("/teachingassignment/{id}/edit")
+    public String showUpdateForm(@PathVariable String id, Model model) {
+        TeachingAssignment assignment = teachingAssignmentService.getAssignmentById(id);
+        if (assignment == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        model.addAttribute("teachingAssignment", assignment);
+        model.addAttribute("managingTypes", ManagingType.values());
+        model.addAttribute("isUpdate", true);
         return "TeachingAssignment/form";
     }
 
