@@ -1,13 +1,12 @@
 package com.example.demo.service;
 
-import com.example.demo.model.Course;
-import com.example.demo.model.Enrollment;
-import com.example.demo.model.TeachingAssignment;
+import com.example.demo.model.*;
 import com.example.demo.repository.*;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 @Service
 public class CourseService {
@@ -25,16 +24,35 @@ public class CourseService {
       this.roomRepository = roomRepository;
       this.departmentRepository = departmentRepository;
   }
-  public Course saveCourse(Course course) {
-      if(departmentRepository.findById(course.getDepartmentId())==null){
-          throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Eroare: Departamentul cu acest ID nu există!");
-      }
-      if(roomRepository.findById(course.getRoomId())==null){
-          throw new ResponseStatusException(HttpStatus.BAD_REQUEST,"Eroare: Camera cu acest ID nu există!");
-      }
+    public Course saveCourse(Course course) {
 
-      return courseRepository.save(course);
-  }
+        Department department = departmentRepository.findById(course.getDepartmentId());
+        if (department == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Eroare: Departamentul cu acest ID nu există!");
+        }
+
+        Room room = roomRepository.findById(course.getRoomId());
+        if (room == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Eroare: Camera cu acest ID nu există!");
+        }
+
+
+        Course savedCourse = courseRepository.save(course);
+
+        //  Sincronizam relația cu Departamentul
+        if (department.getCourses() == null) {
+            department.setCourses(new ArrayList<>());
+        }
+        department.getCourses().add(savedCourse);
+
+        //  Sincronizezi relația cu Sala
+        if (room.getCourses() == null) {
+            room.setCourses(new ArrayList<>());
+        }
+        room.getCourses().add(savedCourse);
+
+        return savedCourse;
+    }
   public Course getCourse(String id) {
       return courseRepository.findById(id);
   }

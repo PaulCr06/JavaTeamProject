@@ -1,4 +1,5 @@
 package com.example.demo.service;
+import com.example.demo.model.Department;
 import com.example.demo.model.TeachingAssignment;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.repository.TeacherRepository;
@@ -8,6 +9,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -27,7 +29,14 @@ public class TeacherService {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Eroare: Departamentul cu acest ID nu există!");
         }
 
-        return teacherRepository.save(teacher);
+        Teacher savedteacher= teacherRepository.save(teacher);
+        Department department = departmentRepository.findById(teacher.getDepartmentId());
+        if(department.getTeachers()==null){
+            department.setTeachers(new ArrayList<>());
+        }
+        department.getTeachers().add(savedteacher);
+
+        return savedteacher;
 
 
     }
