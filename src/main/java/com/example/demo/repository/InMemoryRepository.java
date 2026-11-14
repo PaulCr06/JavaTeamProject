@@ -30,4 +30,13 @@ public abstract class InMemoryRepository<T extends Identifiable<ID>, ID> impleme
     public void delete(ID id) {
         repositoryMap.remove(id);
     }
+
+    @Override
+    public T update(T entity) {
+        if (!repositoryMap.containsKey(entity.getId())) {
+            return null;
+        }
+        repositoryMap.put(entity.getId(), entity);
+        return entity;
+    }
 }

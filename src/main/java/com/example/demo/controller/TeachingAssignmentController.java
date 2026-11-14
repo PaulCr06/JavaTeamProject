@@ -1,7 +1,7 @@
 package com.example.demo.controller;
 
-import com.example.demo.model.TeachingAssignment;
 import com.example.demo.model.ManagingType;
+import com.example.demo.model.TeachingAssignment;
 import com.example.demo.service.TeachingAssignmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
@@ -56,6 +56,15 @@ public class TeachingAssignmentController {
     @PostMapping("/teachingassignment")
     public String saveAssignment(@ModelAttribute TeachingAssignment teachingAssignment) {
         teachingAssignmentService.saveAssignment(teachingAssignment);
+        return "redirect:/teachingassignment";
+    }
+
+    @PostMapping("/teachingassignment/{id}")
+    public String updateAssignment(@PathVariable String id, @ModelAttribute TeachingAssignment teachingAssignment) {
+        teachingAssignment.setId(id);
+        if (teachingAssignmentService.updateAssignment(teachingAssignment) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         return "redirect:/teachingassignment";
     }
 

@@ -4,7 +4,6 @@
     <title th:text="${isUpdate} ? 'Update Assistant' : 'Add Assistant'">Assistant</title>
 </head>
 <body>
-<!--/*@thymesVar id="assistant" type="com.example.demo.model.Assistant"*/-->
 <h1 th:text="${isUpdate} ? 'Update Assistant' : 'Add a New Assistant'">Assistant</h1>
 
 <form th:action="${isUpdate} ? @{/assistant/{id}(id=${assistant.id})} : @{/assistant}" th:object="${assistant}" method="post">

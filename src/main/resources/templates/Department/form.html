@@ -6,7 +6,7 @@
 <body>
 <h1 th:text="${isUpdate} ? 'Update Department' : 'Add a New Department'">Department</h1>
 
-<form th:action="@{/department}" th:object="${department}" method="post">
+<form th:action="${isUpdate} ? @{/department/{id}(id=${department.id})} : @{/department}" th:object="${department}" method="post">
 
     <label>ID:</label>
     <input type="text" th:field="*{id}" th:readonly="${isUpdate}" required /><br><br>

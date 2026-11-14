@@ -18,13 +18,13 @@ public class EnrollmentController {
     }
 
     @GetMapping("/enrollment")
-    public String getAllEnrollments(Model model){
+    public String getAllEnrollments(Model model) {
         model.addAttribute("enrollments", enrollmentService.getAllEnrollments());
         return "enrollment/index";
     }
 
     @GetMapping("/enrollment/{id}")
-    public String getEnrollment(@PathVariable String id, Model model){
+    public String getEnrollment(@PathVariable String id, Model model) {
         Enrollment enrollment = enrollmentService.getEnrollmentById(id);
         if (enrollment == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -36,7 +36,7 @@ public class EnrollmentController {
     @GetMapping("/enrollment/new")
     public String showCreateForm(Model model) {
         model.addAttribute("enrollment", new Enrollment());
-        model.addAttribute("gradeTypes",Grade.values());
+        model.addAttribute("gradeTypes", Grade.values());
         model.addAttribute("isUpdate", false);
         return "enrollment/form";
     }
@@ -56,6 +56,15 @@ public class EnrollmentController {
     @PostMapping("/enrollment")
     public String saveEnrollment(@ModelAttribute Enrollment enrollment) {
         enrollmentService.saveEnrollment(enrollment);
+        return "redirect:/enrollment";
+    }
+
+    @PostMapping("/enrollment/{id}")
+    public String updateEnrollment(@PathVariable String id, @ModelAttribute Enrollment enrollment) {
+        enrollment.setId(id);
+        if (enrollmentService.updateEnrollment(enrollment) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         return "redirect:/enrollment";
     }
 

@@ -1,51 +1,97 @@
-[ {
-  "id" : "a1",
-  "name" : "Muresan z",
-  "assignments" : [ ],
-  "role" : "TA"
-}, {
-  "id" : "a2",
-  "name" : "Popa Ioan",
-  "assignments" : [ ],
-  "role" : "Lab"
-}, {
-  "id" : "a10",
-  "name" : "Nistor Laura",
-  "assignments" : [ ],
-  "role" : "TA"
-}, {
-  "id" : "a3",
-  "name" : "Ilie Ana",
-  "assignments" : [ ],
-  "role" : "Grader"
-}, {
-  "id" : "a4",
-  "name" : "Stoica Radu",
-  "assignments" : [ ],
-  "role" : "Lab"
-}, {
-  "id" : "a5",
-  "name" : "Diaconu Elena",
-  "assignments" : [ ],
-  "role" : "TA"
-}, {
-  "id" : "a6",
-  "name" : "Costea Mihai",
-  "assignments" : [ ],
-  "role" : "Lab"
-}, {
-  "id" : "a7",
-  "name" : "Badea Florin",
-  "assignments" : [ ],
-  "role" : "Grader"
-}, {
-  "id" : "a8",
-  "name" : "Manea Alina",
-  "assignments" : [ ],
-  "role" : "TA"
-}, {
-  "id" : "a9",
-  "name" : "Oprea Stefan",
-  "assignments" : [ ],
-  "role" : "Lab"
-} ]
+[
+    {
+        "id": "a1",
+        "name": "Muresan z",
+        "assignments": [
+            {
+                "id": "ta2",
+                "courseId": "c1",
+                "staffId": "a1",
+                "managing": "Lab"
+            }
+        ],
+        "role": "TA"
+    },
+    {
+        "id": "a2",
+        "name": "Popa Ioan",
+        "assignments": [
+            {
+                "id": "ta4",
+                "courseId": "c2",
+                "staffId": "a2",
+                "managing": "Lab"
+            }
+        ],
+        "role": "Lab"
+    },
+    {
+        "id": "a10",
+        "name": "Nistor Laura",
+        "assignments": [],
+        "role": "TA"
+    },
+    {
+        "id": "a3",
+        "name": "Ilie Ana",
+        "assignments": [
+            {
+                "id": "ta6",
+                "courseId": "c3",
+                "staffId": "a3",
+                "managing": "Lab"
+            }
+        ],
+        "role": "Grader"
+    },
+    {
+        "id": "a4",
+        "name": "Stoica Radu",
+        "assignments": [
+            {
+                "id": "ta8",
+                "courseId": "c4",
+                "staffId": "a4",
+                "managing": "Lab"
+            }
+        ],
+        "role": "Lab"
+    },
+    {
+        "id": "a5",
+        "name": "Diaconu Elena",
+        "assignments": [
+            {
+                "id": "ta10",
+                "courseId": "c5",
+                "staffId": "a5",
+                "managing": "Lab"
+            }
+        ],
+        "role": "TA"
+    },
+    {
+        "id": "a6",
+        "name": "Costea Mihai",
+        "assignments": [],
+        "role": "Lab"
+    },
+    {
+        "id": "a7",
+        "name": "Badea Florin",
+        "assignments": [],
+        "role": "Grader"
+    },
+    {
+        "id": "a8",
+        "name": "Manea Alina",
+        "assignments": [],
+        "role": "TA"
+    },
+    {
+        "id": "a9",
+        "name": "Oprea Stefan",
+        "assignments": [],
+        "role": "Lab"
+    }
+]

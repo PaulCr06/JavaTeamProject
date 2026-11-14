@@ -3,8 +3,6 @@ package com.example.demo.controller;
 import com.example.demo.model.Assistant;
 import com.example.demo.model.Roles;
 import com.example.demo.service.AssistantService;
-
-import org.springframework.context.support.BeanDefinitionDsl.Role;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -34,11 +32,11 @@ public class AssistantController {
         model.addAttribute("assistant", assistant);
         return "Assistant/details";
     }
-    
+
     @GetMapping("/assistant/new")
     public String showCreateForm(Model model) {
         model.addAttribute("assistant", new Assistant());
-        model.addAttribute("roleTypes",Roles.values());
+        model.addAttribute("roleTypes", Roles.values());
         model.addAttribute("isUpdate", false);
         return "Assistant/form";
     }
@@ -57,9 +55,7 @@ public class AssistantController {
 
     @PostMapping("/assistant")
     public String saveAssistant(@ModelAttribute Assistant assistant) {
-        
         assistantService.saveAssistant(assistant);
-    
         return "redirect:/assistant";
     }
 

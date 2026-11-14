@@ -21,6 +21,7 @@ public class AssistantService {
     public Assistant saveAssistant(Assistant assistant) {
         return assistantRepository.save(assistant);
     }
+
     public Assistant updateAssistant(Assistant assistant) {
         return assistantRepository.update(assistant);
     }
@@ -34,8 +35,8 @@ public class AssistantService {
     }
 
     public void deleteAssistant(String id) {
-        for(TeachingAssignment assignment : teachingAssignmentRepository.findAll()){
-            if(id.equals(assignment.getStaffId())){
+        for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
+            if (id.equals(assignment.getStaffId())) {
                 teachingAssignmentRepository.delete(assignment.getId());
             }
         }

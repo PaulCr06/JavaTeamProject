@@ -6,7 +6,7 @@
 <body>
 <h1 th:text="${isUpdate} ? 'Update Room' : 'Add a New Room'">Room</h1>
 
-<form th:action="@{/room}" th:object="${room}" method="post">
+<form th:action="${isUpdate} ? @{/room/{id}(id=${room.id})} : @{/room}" th:object="${room}" method="post">
 
     <label>ID:</label>
     <input type="text" th:field="*{id}" th:readonly="${isUpdate}" required /><br><br>

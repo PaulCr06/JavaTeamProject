@@ -1,15 +1,11 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.model.Room;
 import com.example.demo.service.RoomService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -57,6 +53,15 @@ public class RoomController {
     @PostMapping("/room")
     public String saveRoom(@ModelAttribute Room room) {
         roomService.saveRoom(room);
+        return "redirect:/room";
+    }
+
+    @PostMapping("/room/{id}")
+    public String updateRoom(@PathVariable String id, @ModelAttribute Room room) {
+        room.setId(id);
+        if (roomService.updateRoom(room) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         return "redirect:/room";
     }
 

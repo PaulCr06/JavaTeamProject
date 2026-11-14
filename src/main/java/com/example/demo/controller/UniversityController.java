@@ -1,15 +1,11 @@
 package com.example.demo.controller;
 
-
 import com.example.demo.model.University;
 import com.example.demo.service.UniversityService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
@@ -57,6 +53,15 @@ public class UniversityController {
     @PostMapping("/university")
     public String saveUniversity(@ModelAttribute University university) {
         universityService.saveUniversity(university);
+        return "redirect:/university";
+    }
+
+    @PostMapping("/university/{id}")
+    public String updateUniversity(@PathVariable String id, @ModelAttribute University university) {
+        university.setId(id);
+        if (universityService.updateUniversity(university) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
         return "redirect:/university";
     }
 

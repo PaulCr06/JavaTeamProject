@@ -5,27 +5,25 @@ import com.example.demo.service.DepartmentService;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.ModelAttribute;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.*;
 import org.springframework.web.server.ResponseStatusException;
 
 @Controller
 public class DepartmentController {
     private final DepartmentService departmentService;
+
     public DepartmentController(DepartmentService departmentService) {
         this.departmentService = departmentService;
     }
-    @GetMapping("/department")
-    public String getAllDepartments(Model model){
-        model.addAttribute("departments",departmentService.getAllDepartments());
-        return "Department/index";
 
+    @GetMapping("/department")
+    public String getAllDepartments(Model model) {
+        model.addAttribute("departments", departmentService.getAllDepartments());
+        return "Department/index";
     }
 
     @GetMapping("/department/{id}")
-    public String getDepartment(@PathVariable String id, Model model){
+    public String getDepartment(@PathVariable String id, Model model) {
         Department department = departmentService.getDepartmentById(id);
         if (department == null) {
             throw new ResponseStatusException(HttpStatus.NOT_FOUND);
@@ -35,11 +33,10 @@ public class DepartmentController {
     }
 
     @GetMapping("/department/new")
-    public String showCreateForm(Model model){
-        model.addAttribute("department",new Department());
+    public String showCreateForm(Model model) {
+        model.addAttribute("department", new Department());
         model.addAttribute("isUpdate", false);
         return "Department/form";
-
     }
 
     @GetMapping("/department/{id}/edit")
@@ -54,16 +51,23 @@ public class DepartmentController {
     }
 
     @PostMapping("/department")
-    public String saveDepartment(@ModelAttribute Department department){
-            departmentService.saveDepartment(department);
-            return "redirect:/department";
-
+    public String saveDepartment(@ModelAttribute Department department) {
+        departmentService.saveDepartment(department);
+        return "redirect:/department";
     }
+
+    @PostMapping("/department/{id}")
+    public String updateDepartment(@PathVariable String id, @ModelAttribute Department department) {
+        department.setId(id);
+        if (departmentService.updateDepartment(department) == null) {
+            throw new ResponseStatusException(HttpStatus.NOT_FOUND);
+        }
+        return "redirect:/department";
+    }
+
     @PostMapping("/department/{id}/delete")
-    public String deleteDepartment(@PathVariable String id){
-            departmentService.deleteDepartment(id);
-            return "redirect:/department";
-
+    public String deleteDepartment(@PathVariable String id) {
+        departmentService.deleteDepartment(id);
+        return "redirect:/department";
     }
-
 }
