@@ -18,39 +18,57 @@ public class TeacherService {
     private final TeacherRepository teacherRepository;
     private final TeachingAssignmentRepository teachingAssignmentRepository;
     private final DepartmentRepository departmentRepository;
+    private final TeachingAssignmentService teachingAssignmentService;
 
-    public TeacherService(TeacherRepository teacherRepository, TeachingAssignmentRepository teachingAssignmentRepository, DepartmentRepository departmentRepository) {
+    public TeacherService(TeacherRepository teacherRepository, TeachingAssignmentRepository teachingAssignmentRepository,
+                          DepartmentRepository departmentRepository, TeachingAssignmentService teachingAssignmentService) {
         this.teachingAssignmentRepository = teachingAssignmentRepository;
         this.teacherRepository = teacherRepository;
         this.departmentRepository = departmentRepository;
+        this.teachingAssignmentService = teachingAssignmentService;
     }
 
     public Teacher saveTeacher(Teacher teacher) {
-        if (departmentRepository.findById(teacher.getDepartmentId()) == null) {
+        Department department = departmentRepository.findById(teacher.getDepartmentId());
+        if (department == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
         }
 
         Teacher savedTeacher = teacherRepository.save(teacher);
-        Department department = departmentRepository.findById(teacher.getDepartmentId());
-        if (department != null) {
-            if (department.getTeachers() == null) {
-                department.setTeachers(new ArrayList<>());
-            }
-            department.getTeachers().add(savedTeacher);
+        if (department.getTeachers() == null) {
+            department.setTeachers(new ArrayList<>());
         }
+        department.getTeachers().add(savedTeacher);
+        departmentRepository.update(department);
 
         return savedTeacher;
     }
 
     public Teacher updateTeacher(Teacher teacher) {
-        if (departmentRepository.findById(teacher.getDepartmentId()) == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
-        }
         Teacher existing = teacherRepository.findById(teacher.getId());
         if (existing == null) {
             return null;
         }
-        return teacherRepository.update(teacher);
+
+        if (departmentRepository.findById(teacher.getDepartmentId()) == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
+        }
+
+        Department oldDepartment = departmentRepository.findById(existing.getDepartmentId());
+        if (oldDepartment != null && oldDepartment.getTeachers() != null) {
+            oldDepartment.getTeachers().removeIf(t -> t.getId().equals(existing.getId()));
+            departmentRepository.update(oldDepartment);
+        }
+
+        teacher.setAssignments(existing.getAssignments());
+        Teacher updatedTeacher = teacherRepository.update(teacher);
+        Department targetDepartment = departmentRepository.findById(updatedTeacher.getDepartmentId());
+        if (targetDepartment.getTeachers() == null) {
+            targetDepartment.setTeachers(new ArrayList<>());
+        }
+        targetDepartment.getTeachers().add(updatedTeacher);
+        departmentRepository.update(targetDepartment);
+        return updatedTeacher;
     }
 
     public List<Teacher> findAllTeachers() {
@@ -62,9 +80,20 @@ public class TeacherService {
     }
 
     public void deleteTeacher(String id) {
+        Teacher existing = teacherRepository.findById(id);
+        if (existing == null) {
+            return;
+        }
+
+        Department department = departmentRepository.findById(existing.getDepartmentId());
+        if (department != null && department.getTeachers() != null) {
+            department.getTeachers().removeIf(t -> t.getId().equals(id));
+            departmentRepository.update(department);
+        }
+
         for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
             if (id.equals(assignment.getStaffId())) {
-                teachingAssignmentRepository.delete(assignment.getId());
+                teachingAssignmentService.deleteAssignment(assignment.getId());
             }
         }
         teacherRepository.delete(id);

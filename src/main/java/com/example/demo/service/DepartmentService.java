@@ -45,6 +45,7 @@ public class DepartmentService {
                 university.setDepartments(new ArrayList<>());
             }
             university.getDepartments().add(savedDepartment);
+            universityRepository.update(university);
         }
 
         return savedDepartment;
@@ -59,7 +60,17 @@ public class DepartmentService {
         department.setCourses(existing.getCourses());
         department.setTeachers(existing.getTeachers());
 
-        return departmentRepository.update(department);
+        Department updatedDepartment = departmentRepository.update(department);
+        for (University university : universityRepository.findAll()) {
+            if (university.getDepartments() != null
+                    && university.getDepartments().stream().anyMatch(d -> d.getId().equals(existing.getId()))) {
+                university.getDepartments().replaceAll(d ->
+                        d.getId().equals(updatedDepartment.getId()) ? updatedDepartment : d);
+                universityRepository.update(university);
+            }
+        }
+
+        return updatedDepartment;
     }
 
     public void deleteDepartment(String id) {
@@ -77,6 +88,13 @@ public class DepartmentService {
         if (department.getTeachers() != null) {
             for (Teacher teacher : new ArrayList<>(department.getTeachers())) {
                 teacherService.deleteTeacher(teacher.getId());
+            }
+        }
+
+        for (University university : universityRepository.findAll()) {
+            if (university.getDepartments() != null
+                    && university.getDepartments().removeIf(d -> d.getId().equals(id))) {
+                universityRepository.update(university);
             }
         }
 

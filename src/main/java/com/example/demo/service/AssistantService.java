@@ -12,10 +12,13 @@ import java.util.List;
 public class AssistantService {
     private final AssistantRepository assistantRepository;
     private final TeachingAssignmentRepository teachingAssignmentRepository;
+    private final TeachingAssignmentService teachingAssignmentService;
 
-    public AssistantService(AssistantRepository assistantRepository, TeachingAssignmentRepository teachingAssignmentRepository) {
+    public AssistantService(AssistantRepository assistantRepository, TeachingAssignmentRepository teachingAssignmentRepository,
+                            TeachingAssignmentService teachingAssignmentService) {
         this.teachingAssignmentRepository = teachingAssignmentRepository;
         this.assistantRepository = assistantRepository;
+        this.teachingAssignmentService = teachingAssignmentService;
     }
 
     public Assistant saveAssistant(Assistant assistant) {
@@ -23,6 +26,11 @@ public class AssistantService {
     }
 
     public Assistant updateAssistant(Assistant assistant) {
+        Assistant existing = assistantRepository.findById(assistant.getId());
+        if (existing == null) {
+            return null;
+        }
+        assistant.setAssignments(existing.getAssignments());
         return assistantRepository.update(assistant);
     }
 
@@ -35,9 +43,13 @@ public class AssistantService {
     }
 
     public void deleteAssistant(String id) {
+        if (assistantRepository.findById(id) == null) {
+            return;
+        }
+
         for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
             if (id.equals(assignment.getStaffId())) {
-                teachingAssignmentRepository.delete(assignment.getId());
+                teachingAssignmentService.deleteAssignment(assignment.getId());
             }
         }
         assistantRepository.delete(id);

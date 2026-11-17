@@ -14,10 +14,13 @@ public class StudentService {
 
     private final StudentRepository studentRepository;
     private final EnrollmentRepository enrollmentRepository;
+    private final EnrollmentService enrollmentService;
 
-    public StudentService(StudentRepository studentRepository, EnrollmentRepository enrollmentRepository) {
+    public StudentService(StudentRepository studentRepository, EnrollmentRepository enrollmentRepository,
+                          EnrollmentService enrollmentService) {
         this.enrollmentRepository = enrollmentRepository;
         this.studentRepository = studentRepository;
+        this.enrollmentService = enrollmentService;
     }
 
     public Student saveStudent(Student student) {
@@ -41,7 +44,7 @@ public class StudentService {
         List<Enrollment> allEnrollments = enrollmentRepository.findAll();
         for (Enrollment enrollment : allEnrollments) {
             if (id.equals(enrollment.getStudentId())) {
-                enrollmentRepository.delete(enrollment.getId());
+                enrollmentService.deleteEnrollment(enrollment.getId());
             }
         }
         studentRepository.delete(id);
