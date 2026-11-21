@@ -11,15 +11,19 @@ public class Room implements Identifiable<String>{
 
     public Room() {}
 
+    public Room(double capacity, String number) {
+        this(null, capacity, number, new ArrayList<>());
+    }
+
     public Room(String id, double capacity, String number, List<Course> courses) {
         this.id = id;
         this.capacity = capacity;
         this.number = number;
-        this.courses = courses;
+        this.courses = courses != null ? courses : new ArrayList<>();
     }
+
     public String getId() {
         return id;
-
     }
     public void setId(String id) {
         this.id = id;
@@ -40,9 +44,6 @@ public class Room implements Identifiable<String>{
         return courses;
     }
     public void setCourses(List<Course> courses) {
-        this.courses = courses;
+        this.courses = courses != null ? courses : new ArrayList<>();
     }
-
-
-
 }

@@ -19,13 +19,19 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
     private final String filePath;
     private final Class<T> entityClass;
     private final ObjectMapper objectMapper;
+    private final String idPrefix;
 
     public InFileRepository(String filePath, Class<T> entityClass) {
+        this(filePath, entityClass, "");
+    }
+
+    public InFileRepository(String filePath, Class<T> entityClass, String idPrefix) {
         this.filePath = filePath;
         this.entityClass = entityClass;
+        this.idPrefix = idPrefix != null ? idPrefix : "";
         this.objectMapper = new ObjectMapper();
         this.objectMapper.registerModule(new JavaTimeModule());
-        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT);//pretty-print
+        this.objectMapper.enable(SerializationFeature.INDENT_OUTPUT); // pretty-print
 
         loadFromFile();
     }
@@ -39,18 +45,53 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
         }
     }
 
+    @Override
+    @SuppressWarnings("unchecked")
+    public ID generateNextId() {
+        loadFromFile();
+        long max = 0;
+        for (ID id : repositoryMap.keySet()) {
+            if (id == null) continue;
+            String str = id.toString().trim();
+            if (!idPrefix.isEmpty() && str.toLowerCase().startsWith(idPrefix.toLowerCase())) {
+                String numPart = str.substring(idPrefix.length());
+                try {
+                    long val = Long.parseLong(numPart);
+                    if (val > max) max = val;
+                } catch (NumberFormatException ignored) {}
+            }
+            try {
+                long val = Long.parseLong(str);
+                if (val > max) max = val;
+            } catch (NumberFormatException ignored) {}
+        }
+        long next = max + 1;
+        while (true) {
+            String candidateStr = idPrefix + next;
+            ID candidate = (ID) candidateStr;
+            if (!repositoryMap.containsKey(candidate)) {
+                return candidate;
+            }
+            next++;
+        }
+    }
+
     private void loadFromFile() {
         repositoryMap.clear();
 
         File file = new File(filePath);
-        if (!file.exists()) {
+        if (!file.exists() || file.length() == 0) {
             return;
         }
 
         try {
             List<T> list = objectMapper.readerForListOf(entityClass).readValue(file);
-            for (T item : list) {
-                repositoryMap.put(item.getId(), item);
+            if (list != null) {
+                for (T item : list) {
+                    if (item != null && item.getId() != null) {
+                        repositoryMap.put(item.getId(), item);
+                    }
+                }
             }
         } catch (IOException e) {
             throw new UncheckedIOException("Could not load file: " + filePath, e);
@@ -75,11 +116,15 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
         if (entity == null) {
             throw new IllegalArgumentException("Entity must not be null.");
         }
-        validateId(entity.getId());
 
         loadFromFile();
-        if (repositoryMap.containsKey(entity.getId())) {
-            throw new IllegalArgumentException("Entity with ID '" + entity.getId() + "' already exists.");
+        if (entity.getId() == null || (entity.getId() instanceof String str && str.trim().isEmpty())) {
+            entity.setId(generateNextId());
+        } else {
+            validateId(entity.getId());
+            if (repositoryMap.containsKey(entity.getId())) {
+                throw new IllegalArgumentException("Entity with ID '" + entity.getId() + "' already exists.");
+            }
         }
 
         repositoryMap.put(entity.getId(), entity);
@@ -125,7 +170,8 @@ public abstract class InFileRepository<T extends Identifiable<ID>, ID> implement
             return;
         }
         loadFromFile();
-        repositoryMap.remove(id);
-        saveToFile();
+        if (repositoryMap.remove(id) != null) {
+            saveToFile();
+        }
     }
 }

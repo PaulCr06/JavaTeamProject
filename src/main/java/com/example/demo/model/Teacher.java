@@ -2,7 +2,7 @@ package com.example.demo.model;
 
 import java.time.LocalDate;
 
-public class Teacher extends Staff  {
+public class Teacher extends Staff {
     private String title;
     private String departmentId;
     private String email;
@@ -12,6 +12,10 @@ public class Teacher extends Staff  {
         super();
     }
 
+    public Teacher(String name, String title, String departmentId, String email, LocalDate hireDate){
+        this(null, name, title, departmentId, email, hireDate);
+    }
+
     public Teacher(String id, String name, String title, String departmentId, String email, LocalDate hireDate){
         super(id, name);
         this.title = title;
@@ -19,7 +23,6 @@ public class Teacher extends Staff  {
         this.email = email;
         this.hireDate = hireDate;
     }
-
 
     public String getTitle() {
         return title;

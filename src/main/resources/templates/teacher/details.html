@@ -13,6 +13,25 @@
 <p>Email: <span th:text="${teacher.email}"></span></p>
 <p>Hire Date: <span th:text="${teacher.hireDate}"></span></p>
 
+<h2>Teaching Assignments</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Assignment ID</th>
+        <th>Course ID</th>
+        <th>Managing Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="assignment : ${teacher.assignments}">
+        <td th:text="${assignment.id}">ID</td>
+        <td th:text="${assignment.courseId}">Course ID</td>
+        <td th:text="${assignment.managing}">Role</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/teacher}">Back to list</a>
 </body>
 </html>

@@ -12,18 +12,22 @@ public class Course implements Identifiable<String> {
     private List<Enrollment> enrollments = new ArrayList<>();
     private List<TeachingAssignment> assignments = new ArrayList<>();
 
-
     public Course(){}
 
-    public Course(String id, String title, int credits, String departmentId, String roomId,List<Enrollment>enrollments,List<TeachingAssignment> assignments) {
+    public Course(String title, int credits, String departmentId, String roomId) {
+        this(null, title, credits, departmentId, roomId, new ArrayList<>(), new ArrayList<>());
+    }
+
+    public Course(String id, String title, int credits, String departmentId, String roomId, List<Enrollment> enrollments, List<TeachingAssignment> assignments) {
         this.id = id;
         this.title = title;
         this.credits = credits;
         this.departmentId = departmentId;
         this.roomId = roomId;
-        this.enrollments = enrollments;
-        this.assignments = assignments;
+        this.enrollments = enrollments != null ? enrollments : new ArrayList<>();
+        this.assignments = assignments != null ? assignments : new ArrayList<>();
     }
+
     public String getId() {
         return id;
     }
@@ -58,14 +62,12 @@ public class Course implements Identifiable<String> {
         return enrollments;
     }
     public void setEnrollments(List<Enrollment> enrollments) {
-        this.enrollments = enrollments;
+        this.enrollments = enrollments != null ? enrollments : new ArrayList<>();
     }
     public List<TeachingAssignment> getAssignments() {
         return assignments;
     }
     public void setAssignments(List<TeachingAssignment> assignments) {
-        this.assignments = assignments;
+        this.assignments = assignments != null ? assignments : new ArrayList<>();
     }
-
-
 }

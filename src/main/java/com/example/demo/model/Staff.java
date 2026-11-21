@@ -5,11 +5,14 @@ import java.util.List;
 
 public abstract class Staff implements Identifiable<String> {
     private String id;
-    private String  name;
+    private String name;
     private List<TeachingAssignment> assignments = new ArrayList<>();
 
-
     public Staff(){}
+
+    public Staff(String name) {
+        this(null, name);
+    }
 
     public Staff(String id, String name){
         this.id = id;

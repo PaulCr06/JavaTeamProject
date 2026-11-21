@@ -13,6 +13,10 @@ public class Student implements Identifiable<String> {
 
     public Student(){}
 
+    public Student(String name, LocalDate birthDate, String email) {
+        this(null, name, birthDate, email);
+    }
+
     public Student(String id, String name, LocalDate birthDate, String email){
         this.id = id;
         this.name = name;

@@ -42,118 +42,179 @@ public class CourseService {
     }
 
     public Course saveCourse(Course course) {
-        Department department = departmentRepository.findById(course.getDepartmentId());
-        if (department == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
+        if (course == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course cannot be null!");
+        }
+        if (course.getTitle() == null || course.getTitle().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course title must not be empty!");
+        }
+        if (course.getCredits() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Credits must be a positive integer!");
         }
 
-        Room room = roomRepository.findById(course.getRoomId());
-        if (room == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room with this ID does not exist!");
+        if (departmentRepository != null) {
+            Department department = departmentRepository.findById(course.getDepartmentId());
+            if (department == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
+            }
+            if (department.getCourses() == null) {
+                department.setCourses(new ArrayList<>());
+            }
+            department.getCourses().add(course);
+            departmentRepository.update(department);
         }
 
-        Course savedCourse = courseRepository.save(course);
-
-        if (department.getCourses() == null) {
-            department.setCourses(new ArrayList<>());
+        if (roomRepository != null) {
+            Room room = roomRepository.findById(course.getRoomId());
+            if (room == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room with this ID does not exist!");
+            }
+            if (room.getCourses() == null) {
+                room.setCourses(new ArrayList<>());
+            }
+            room.getCourses().add(course);
+            roomRepository.update(room);
         }
-        department.getCourses().add(savedCourse);
-        departmentRepository.update(department);
 
-        if (room.getCourses() == null) {
-            room.setCourses(new ArrayList<>());
+        if (courseRepository != null) {
+            return courseRepository.save(course);
         }
-        room.getCourses().add(savedCourse);
-        roomRepository.update(room);
-
-        return savedCourse;
+        return course;
     }
 
     public Course updateCourse(Course course) {
-        Course existing = courseRepository.findById(course.getId());
+        if (course == null || course.getId() == null) {
+            return null;
+        }
+        if (course.getTitle() == null || course.getTitle().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course title must not be empty!");
+        }
+        if (course.getCredits() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Credits must be a positive integer!");
+        }
+
+        Course existing = courseRepository != null ? courseRepository.findById(course.getId()) : null;
         if (existing == null) {
             return null;
         }
 
-        Department department = departmentRepository.findById(course.getDepartmentId());
-        if (department == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
+        if (departmentRepository != null) {
+            Department department = departmentRepository.findById(course.getDepartmentId());
+            if (department == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department with this ID does not exist!");
+            }
+            Department oldDepartment = departmentRepository.findById(existing.getDepartmentId());
+            if (oldDepartment != null && oldDepartment.getCourses() != null) {
+                oldDepartment.getCourses().removeIf(c -> c.getId().equals(existing.getId()));
+                departmentRepository.update(oldDepartment);
+            }
+            Department targetDepartment = departmentRepository.findById(course.getDepartmentId());
+            if (targetDepartment != null) {
+                if (targetDepartment.getCourses() == null) {
+                    targetDepartment.setCourses(new ArrayList<>());
+                }
+                targetDepartment.getCourses().add(course);
+                departmentRepository.update(targetDepartment);
+            }
         }
 
-        Room room = roomRepository.findById(course.getRoomId());
-        if (room == null) {
-            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room with this ID does not exist!");
-        }
-
-        Department oldDepartment = departmentRepository.findById(existing.getDepartmentId());
-        if (oldDepartment != null && oldDepartment.getCourses() != null) {
-            oldDepartment.getCourses().removeIf(c -> c.getId().equals(existing.getId()));
-            departmentRepository.update(oldDepartment);
-        }
-
-        Room oldRoom = roomRepository.findById(existing.getRoomId());
-        if (oldRoom != null && oldRoom.getCourses() != null) {
-            oldRoom.getCourses().removeIf(c -> c.getId().equals(existing.getId()));
-            roomRepository.update(oldRoom);
+        if (roomRepository != null) {
+            Room room = roomRepository.findById(course.getRoomId());
+            if (room == null) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room with this ID does not exist!");
+            }
+            Room oldRoom = roomRepository.findById(existing.getRoomId());
+            if (oldRoom != null && oldRoom.getCourses() != null) {
+                oldRoom.getCourses().removeIf(c -> c.getId().equals(existing.getId()));
+                roomRepository.update(oldRoom);
+            }
+            Room targetRoom = roomRepository.findById(course.getRoomId());
+            if (targetRoom != null) {
+                if (targetRoom.getCourses() == null) {
+                    targetRoom.setCourses(new ArrayList<>());
+                }
+                targetRoom.getCourses().add(course);
+                roomRepository.update(targetRoom);
+            }
         }
 
         course.setEnrollments(existing.getEnrollments());
         course.setAssignments(existing.getAssignments());
 
-        Course updatedCourse = courseRepository.update(course);
-
-        Department targetDepartment = departmentRepository.findById(updatedCourse.getDepartmentId());
-        if (targetDepartment.getCourses() == null) {
-            targetDepartment.setCourses(new ArrayList<>());
-        }
-        targetDepartment.getCourses().add(updatedCourse);
-        departmentRepository.update(targetDepartment);
-
-        Room targetRoom = roomRepository.findById(updatedCourse.getRoomId());
-        if (targetRoom.getCourses() == null) {
-            targetRoom.setCourses(new ArrayList<>());
-        }
-        targetRoom.getCourses().add(updatedCourse);
-        roomRepository.update(targetRoom);
-
-        return updatedCourse;
+        return courseRepository.update(course);
     }
 
     public Course getCourse(String id) {
-        return courseRepository.findById(id);
+        if (courseRepository == null) {
+            return null;
+        }
+        Course course = courseRepository.findById(id);
+        if (course != null) {
+            if (enrollmentRepository != null) {
+                List<Enrollment> courseEnrollments = new ArrayList<>();
+                for (Enrollment enrollment : enrollmentRepository.findAll()) {
+                    if (id.equals(enrollment.getCourseId())) {
+                        courseEnrollments.add(enrollment);
+                    }
+                }
+                course.setEnrollments(courseEnrollments);
+            }
+
+            if (teachingAssignmentRepository != null) {
+                List<TeachingAssignment> courseAssignments = new ArrayList<>();
+                for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
+                    if (id.equals(assignment.getCourseId())) {
+                        courseAssignments.add(assignment);
+                    }
+                }
+                course.setAssignments(courseAssignments);
+            }
+        }
+        return course;
     }
 
     public List<Course> getAllCourses() {
-        return courseRepository.findAll();
+        return courseRepository != null ? courseRepository.findAll() : new ArrayList<>();
     }
 
     public void deleteCourse(String id) {
+        if (courseRepository == null) {
+            return;
+        }
         Course course = courseRepository.findById(id);
         if (course == null) {
             return;
         }
 
-        Department department = departmentRepository.findById(course.getDepartmentId());
-        if (department != null && department.getCourses() != null) {
-            department.getCourses().removeIf(c -> c.getId().equals(id));
-            departmentRepository.update(department);
-        }
-
-        Room room = roomRepository.findById(course.getRoomId());
-        if (room != null && room.getCourses() != null) {
-            room.getCourses().removeIf(c -> c.getId().equals(id));
-            roomRepository.update(room);
-        }
-
-        for (Enrollment enrollment : enrollmentRepository.findAll()) {
-            if (id.equals(enrollment.getCourseId())) {
-                enrollmentService.deleteEnrollment(enrollment.getId());
+        if (departmentRepository != null) {
+            Department department = departmentRepository.findById(course.getDepartmentId());
+            if (department != null && department.getCourses() != null) {
+                department.getCourses().removeIf(c -> c.getId().equals(id));
+                departmentRepository.update(department);
             }
         }
 
-        for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
-            if (id.equals(assignment.getCourseId())) {
-                teachingAssignmentService.deleteAssignment(assignment.getId());
+        if (roomRepository != null) {
+            Room room = roomRepository.findById(course.getRoomId());
+            if (room != null && room.getCourses() != null) {
+                room.getCourses().removeIf(c -> c.getId().equals(id));
+                roomRepository.update(room);
+            }
+        }
+
+        if (enrollmentRepository != null && enrollmentService != null) {
+            for (Enrollment enrollment : enrollmentRepository.findAll()) {
+                if (id.equals(enrollment.getCourseId())) {
+                    enrollmentService.deleteEnrollment(enrollment.getId());
+                }
+            }
+        }
+
+        if (teachingAssignmentRepository != null && teachingAssignmentService != null) {
+            for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
+                if (id.equals(assignment.getCourseId())) {
+                    teachingAssignmentService.deleteAssignment(assignment.getId());
+                }
             }
         }
 

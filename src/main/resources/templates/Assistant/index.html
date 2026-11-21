@@ -23,13 +23,13 @@
         <td th:text="${item.name}">Name</td>
         <td th:text="${item.role}">Role</td>
         <td>
-            <form th:action="@{/assistant/{id}(id=${item.id})}" method="get">
+            <form th:action="@{/assistant/{id}(id=${item.id})}" method="get" style="display:inline;">
                 <button type="submit">Details</button>
             </form>
-            <form th:action="@{/assistant/{id}/edit(id=${item.id})}" method="get">
+            <form th:action="@{/assistant/{id}/edit(id=${item.id})}" method="get" style="display:inline;">
                 <button type="submit">Update</button>
             </form>
-            <form th:action="@{'/assistant/' + ${item.id} + '/delete'}" method="post">
+            <form th:action="@{'/assistant/' + ${item.id} + '/delete'}" method="post" style="display:inline;">
                 <button type="submit">Delete</button>
             </form>
         </td>

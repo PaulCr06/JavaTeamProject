@@ -88,37 +88,7 @@
 }, {
   "id" : "dep3",
   "name" : "Information Systems",
-  "courses" : [ {
-    "id" : "c3",
-    "title" : "Database Systems",
-    "credits" : 5,
-    "departmentId" : "dep3",
-    "roomId" : "r3",
-    "enrollments" : [ {
-      "id" : "e5",
-      "studentId" : "5",
-      "courseId" : "c3",
-      "grade" : "D",
-      "enrollmentDate" : [ 2026, 10, 3 ]
-    }, {
-      "id" : "e6",
-      "studentId" : "6",
-      "courseId" : "c3",
-      "grade" : "A",
-      "enrollmentDate" : [ 2026, 10, 3 ]
-    } ],
-    "assignments" : [ {
-      "id" : "ta6",
-      "courseId" : "c3",
-      "staffId" : "a3",
-      "managing" : "Lab"
-    }, {
-      "id" : "ta5",
-      "courseId" : "c3",
-      "staffId" : "t3",
-      "managing" : "Course"
-    } ]
-  } ],
+  "courses" : [ ],
   "teachers" : [ {
     "id" : "t5",
     "name" : "Boian Rares",

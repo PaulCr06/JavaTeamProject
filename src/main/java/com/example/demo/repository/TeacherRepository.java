@@ -6,6 +6,10 @@ import org.springframework.stereotype.Repository;
 @Repository
 public class TeacherRepository extends InFileRepository<Teacher, String> {
     public TeacherRepository() {
-        super("src/main/resources/data/teacher.json", Teacher.class);
+        super("src/main/resources/data/teacher.json", Teacher.class, "t");
+    }
+
+    public TeacherRepository(String filePath) {
+        super(filePath, Teacher.class, "t");
     }
 }

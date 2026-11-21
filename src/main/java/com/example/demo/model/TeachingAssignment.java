@@ -8,6 +8,10 @@ public class TeachingAssignment implements Identifiable<String> {
 
     public TeachingAssignment(){}
 
+    public TeachingAssignment(String courseId, String staffId, ManagingType managing) {
+        this(null, courseId, staffId, managing);
+    }
+
     public TeachingAssignment(String id, String courseId, String staffId, ManagingType managing){
         this.id = id;
         this.courseId = courseId;

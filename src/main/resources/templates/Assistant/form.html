@@ -7,8 +7,7 @@
 <h1 th:text="${isUpdate} ? 'Update Assistant' : 'Add a New Assistant'">Assistant</h1>
 
 <form th:action="${isUpdate} ? @{/assistant/{id}(id=${assistant.id})} : @{/assistant}" th:object="${assistant}" method="post">
-    <label>ID:</label>
-    <input type="text" th:field="*{id}" th:readonly="${isUpdate}" required /><br><br>
+    <p th:if="${isUpdate}">ID: <strong th:text="${assistant.id}"></strong></p>
 
     <label>Name:</label>
     <input type="text" th:field="*{name}" required /><br><br>

@@ -8,17 +8,20 @@ public class University implements Identifiable<String> {
     private String name;
     private String city;
     private List<Department> departments = new ArrayList<>();
-    private List<Room>rooms = new ArrayList<>();
+    private List<Room> rooms = new ArrayList<>();
 
     public University(){}
 
-    public University(String id,String name,String city,List<Department>departments,List<Room>rooms){
-        this.id=id;
-        this.name=name;
-        this.city=city;
-        this.departments=departments;
-        this.rooms=rooms;
+    public University(String name, String city) {
+        this(null, name, city, new ArrayList<>(), new ArrayList<>());
+    }
 
+    public University(String id, String name, String city, List<Department> departments, List<Room> rooms){
+        this.id = id;
+        this.name = name;
+        this.city = city;
+        this.departments = departments != null ? departments : new ArrayList<>();
+        this.rooms = rooms != null ? rooms : new ArrayList<>();
     }
 
     public String getId() {
@@ -43,36 +46,12 @@ public class University implements Identifiable<String> {
         return departments;
     }
     public void setDepartments(List<Department> departments) {
-        this.departments = departments;
+        this.departments = departments != null ? departments : new ArrayList<>();
     }
     public List<Room> getRooms() {
         return rooms;
     }
     public void setRooms(List<Room> rooms) {
-        this.rooms = rooms;
+        this.rooms = rooms != null ? rooms : new ArrayList<>();
     }
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
-
 }

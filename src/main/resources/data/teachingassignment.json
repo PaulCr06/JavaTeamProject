@@ -4,16 +4,6 @@
   "staffId" : "a2",
   "managing" : "Lab"
 }, {
-  "id" : "ta6",
-  "courseId" : "c3",
-  "staffId" : "a3",
-  "managing" : "Lab"
-}, {
-  "id" : "ta5",
-  "courseId" : "c3",
-  "staffId" : "t3",
-  "managing" : "Course"
-}, {
   "id" : "ta8",
   "courseId" : "c4",
   "staffId" : "a4",

@@ -5,7 +5,9 @@ import com.example.demo.model.Room;
 import com.example.demo.model.University;
 import com.example.demo.repository.RoomRepository;
 import com.example.demo.repository.UniversityRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -23,7 +25,17 @@ public class RoomService {
     }
 
     public Room getRoom(String roomId) {
-        return roomRepository.findById(roomId);
+        Room room = roomRepository.findById(roomId);
+        if (room != null) {
+            List<Course> roomCourses = new ArrayList<>();
+            for (Course course : courseService.getAllCourses()) {
+                if (roomId.equals(course.getRoomId())) {
+                    roomCourses.add(course);
+                }
+            }
+            room.setCourses(roomCourses);
+        }
+        return room;
     }
 
     public List<Room> getRooms() {
@@ -31,27 +43,60 @@ public class RoomService {
     }
 
     public Room saveRoom(Room room) {
+        if (room == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room cannot be null!");
+        }
+        if (room.getNumber() == null || room.getNumber().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room number must not be empty!");
+        }
+        if (room.getCapacity() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room capacity must be positive!");
+        }
+
         Room savedRoom = roomRepository.save(room);
 
-        if (!universityRepository.findAll().isEmpty()) {
-            University university = universityRepository.findAll().get(0);
+        List<University> universities = universityRepository.findAll();
+        if (!universities.isEmpty()) {
+            University university = universities.get(0);
             if (university.getRooms() == null) {
                 university.setRooms(new ArrayList<>());
             }
             university.getRooms().add(savedRoom);
+            universityRepository.update(university);
         }
 
         return savedRoom;
     }
 
     public Room updateRoom(Room room) {
+        if (room == null || room.getId() == null) {
+            return null;
+        }
+        if (room.getNumber() == null || room.getNumber().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room number must not be empty!");
+        }
+        if (room.getCapacity() <= 0) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Room capacity must be positive!");
+        }
+
         Room existing = roomRepository.findById(room.getId());
         if (existing == null) {
             return null;
         }
 
         room.setCourses(existing.getCourses());
-        return roomRepository.update(room);
+        Room updatedRoom = roomRepository.update(room);
+
+        for (University university : universityRepository.findAll()) {
+            if (university.getRooms() != null
+                    && university.getRooms().stream().anyMatch(r -> r.getId().equals(existing.getId()))) {
+                university.getRooms().replaceAll(r ->
+                        r.getId().equals(updatedRoom.getId()) ? updatedRoom : r);
+                universityRepository.update(university);
+            }
+        }
+
+        return updatedRoom;
     }
 
     public void deleteRoom(String id) {
@@ -60,9 +105,16 @@ public class RoomService {
             return;
         }
 
-        if (room.getCourses() != null) {
-            for (Course course : new ArrayList<>(room.getCourses())) {
+        for (Course course : courseService.getAllCourses()) {
+            if (id.equals(course.getRoomId())) {
                 courseService.deleteCourse(course.getId());
+            }
+        }
+
+        for (University university : universityRepository.findAll()) {
+            if (university.getRooms() != null
+                    && university.getRooms().removeIf(r -> r.getId().equals(id))) {
+                universityRepository.update(university);
             }
         }
 

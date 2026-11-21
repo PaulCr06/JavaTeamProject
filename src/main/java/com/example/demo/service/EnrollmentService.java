@@ -2,6 +2,7 @@ package com.example.demo.service;
 
 import com.example.demo.model.Course;
 import com.example.demo.model.Enrollment;
+import com.example.demo.model.Grade;
 import com.example.demo.model.Student;
 import com.example.demo.repository.CourseRepository;
 import com.example.demo.repository.EnrollmentRepository;
@@ -10,6 +11,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
 import org.springframework.web.server.ResponseStatusException;
 
+import java.time.LocalDate;
 import java.util.ArrayList;
 import java.util.List;
 
@@ -26,6 +28,16 @@ public class EnrollmentService {
     }
 
     public Enrollment saveEnrollment(Enrollment enrollment) {
+        if (enrollment == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Enrollment cannot be null!");
+        }
+        if (enrollment.getStudentId() == null || enrollment.getStudentId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Student ID must not be empty!");
+        }
+        if (enrollment.getCourseId() == null || enrollment.getCourseId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course ID must not be empty!");
+        }
+
         Student student = studentRepository.findById(enrollment.getStudentId());
         if (student == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Student with this ID does not exist!");
@@ -33,6 +45,20 @@ public class EnrollmentService {
         Course course = courseRepository.findById(enrollment.getCourseId());
         if (course == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course with this ID does not exist!");
+        }
+
+        boolean alreadyEnrolled = enrollmentRepository.findAll().stream()
+                .anyMatch(e -> enrollment.getStudentId().equals(e.getStudentId())
+                        && enrollment.getCourseId().equals(e.getCourseId()));
+        if (alreadyEnrolled) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Student is already enrolled in this course!");
+        }
+
+        if (enrollment.getGrade() == null) {
+            enrollment.setGrade(Grade.NA);
+        }
+        if (enrollment.getEnrollmentDate() == null) {
+            enrollment.setEnrollmentDate(LocalDate.now());
         }
 
         Enrollment savedEnrollment = enrollmentRepository.save(enrollment);
@@ -53,6 +79,10 @@ public class EnrollmentService {
     }
 
     public Enrollment updateEnrollment(Enrollment enrollment) {
+        if (enrollment == null || enrollment.getId() == null) {
+            return null;
+        }
+
         Enrollment existing = enrollmentRepository.findById(enrollment.getId());
         if (existing == null) {
             return null;
@@ -65,6 +95,21 @@ public class EnrollmentService {
         Course newCourse = courseRepository.findById(enrollment.getCourseId());
         if (newCourse == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course with this ID does not exist!");
+        }
+
+        boolean duplicateOther = enrollmentRepository.findAll().stream()
+                .anyMatch(e -> !e.getId().equals(enrollment.getId())
+                        && enrollment.getStudentId().equals(e.getStudentId())
+                        && enrollment.getCourseId().equals(e.getCourseId()));
+        if (duplicateOther) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Student is already enrolled in this course!");
+        }
+
+        if (enrollment.getGrade() == null) {
+            enrollment.setGrade(existing.getGrade());
+        }
+        if (enrollment.getEnrollmentDate() == null) {
+            enrollment.setEnrollmentDate(existing.getEnrollmentDate());
         }
 
         Student oldStudent = studentRepository.findById(existing.getStudentId());

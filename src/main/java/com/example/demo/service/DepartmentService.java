@@ -6,7 +6,9 @@ import com.example.demo.model.Teacher;
 import com.example.demo.model.University;
 import com.example.demo.repository.DepartmentRepository;
 import com.example.demo.repository.UniversityRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -28,7 +30,25 @@ public class DepartmentService {
     }
 
     public Department getDepartmentById(String id) {
-        return departmentRepository.findById(id);
+        Department department = departmentRepository.findById(id);
+        if (department != null) {
+            List<Course> deptCourses = new ArrayList<>();
+            for (Course course : courseService.getAllCourses()) {
+                if (id.equals(course.getDepartmentId())) {
+                    deptCourses.add(course);
+                }
+            }
+            department.setCourses(deptCourses);
+
+            List<Teacher> deptTeachers = new ArrayList<>();
+            for (Teacher teacher : teacherService.findAllTeachers()) {
+                if (id.equals(teacher.getDepartmentId())) {
+                    deptTeachers.add(teacher);
+                }
+            }
+            department.setTeachers(deptTeachers);
+        }
+        return department;
     }
 
     public List<Department> getAllDepartments() {
@@ -36,6 +56,13 @@ public class DepartmentService {
     }
 
     public Department saveDepartment(Department department) {
+        if (department == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department cannot be null!");
+        }
+        if (department.getName() == null || department.getName().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department name must not be empty!");
+        }
+
         Department savedDepartment = departmentRepository.save(department);
         List<University> universities = universityRepository.findAll();
 
@@ -52,6 +79,13 @@ public class DepartmentService {
     }
 
     public Department updateDepartment(Department department) {
+        if (department == null || department.getId() == null) {
+            return null;
+        }
+        if (department.getName() == null || department.getName().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Department name must not be empty!");
+        }
+
         Department existing = departmentRepository.findById(department.getId());
         if (existing == null) {
             return null;
@@ -79,14 +113,14 @@ public class DepartmentService {
             return;
         }
 
-        if (department.getCourses() != null) {
-            for (Course course : new ArrayList<>(department.getCourses())) {
+        for (Course course : courseService.getAllCourses()) {
+            if (id.equals(course.getDepartmentId())) {
                 courseService.deleteCourse(course.getId());
             }
         }
 
-        if (department.getTeachers() != null) {
-            for (Teacher teacher : new ArrayList<>(department.getTeachers())) {
+        for (Teacher teacher : teacherService.findAllTeachers()) {
+            if (id.equals(teacher.getDepartmentId())) {
                 teacherService.deleteTeacher(teacher.getId());
             }
         }

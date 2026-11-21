@@ -6,6 +6,26 @@
 <p>ID: <span th:text="${assistant.id}"></span></p>
 <p>Name: <span th:text="${assistant.name}"></span></p>
 <p>Role: <span th:text="${assistant.role}"></span></p>
+
+<h2>Teaching Assignments</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>Assignment ID</th>
+        <th>Course ID</th>
+        <th>Managing Role</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="assignment : ${assistant.assignments}">
+        <td th:text="${assignment.id}">ID</td>
+        <td th:text="${assignment.courseId}">Course ID</td>
+        <td th:text="${assignment.managing}">Role</td>
+    </tr>
+    </tbody>
+</table>
+
+<br>
 <a th:href="@{/assistant}">Back to list</a>
 </body>
 </html>

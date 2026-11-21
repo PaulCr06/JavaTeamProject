@@ -37,25 +37,13 @@
 }, {
   "id" : "5",
   "name" : "Dumitru Alexandru",
-  "enrollments" : [ {
-    "id" : "e5",
-    "studentId" : "5",
-    "courseId" : "c3",
-    "grade" : "D",
-    "enrollmentDate" : [ 2026, 10, 3 ]
-  } ],
+  "enrollments" : [ ],
   "birthDate" : [ 2005, 1, 25 ],
   "email" : "alex@student.ubbcluj.ro"
 }, {
   "id" : "6",
   "name" : "Marin Andreea",
-  "enrollments" : [ {
-    "id" : "e6",
-    "studentId" : "6",
-    "courseId" : "c3",
-    "grade" : "A",
-    "enrollmentDate" : [ 2026, 10, 3 ]
-  } ],
+  "enrollments" : [ ],
   "birthDate" : [ 2004, 12, 5 ],
   "email" : "andreea@student.ubbcluj.ro"
 }, {

@@ -8,4 +8,7 @@ public interface CrudRepository<T, ID> {
     T findById(ID id);
     void delete(ID id);
     T update(T entity);
+    default ID generateNextId() {
+        return null;
+    }
 }

@@ -4,7 +4,9 @@ import com.example.demo.model.Department;
 import com.example.demo.model.Room;
 import com.example.demo.model.University;
 import com.example.demo.repository.UniversityRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
 import java.util.ArrayList;
 import java.util.List;
@@ -22,11 +24,29 @@ public class UniversityService {
         this.roomService = roomService;
     }
 
+    private void validateUniversity(University university) {
+        if (university == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: University cannot be null!");
+        }
+        if (university.getName() == null || university.getName().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: University name must not be empty!");
+        }
+        if (university.getCity() == null || university.getCity().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: University city must not be empty!");
+        }
+    }
+
     public University saveUniversity(University university) {
+        validateUniversity(university);
         return universityRepository.save(university);
     }
 
     public University updateUniversity(University university) {
+        if (university == null || university.getId() == null) {
+            return null;
+        }
+        validateUniversity(university);
+
         University existing = universityRepository.findById(university.getId());
         if (existing == null) {
             return null;
@@ -44,13 +64,13 @@ public class UniversityService {
             return;
         }
 
-        if (u1.getDepartments() != null) {
+        if (u1.getDepartments() != null && departmentService != null) {
             for (Department d : new ArrayList<>(u1.getDepartments())) {
                 departmentService.deleteDepartment(d.getId());
             }
         }
 
-        if (u1.getRooms() != null) {
+        if (u1.getRooms() != null && roomService != null) {
             for (Room r : new ArrayList<>(u1.getRooms())) {
                 roomService.deleteRoom(r.getId());
             }
@@ -64,6 +84,25 @@ public class UniversityService {
     }
 
     public University getUniversityById(String id) {
-        return universityRepository.findById(id);
+        University university = universityRepository.findById(id);
+        if (university != null) {
+            if (departmentService != null && university.getDepartments() != null) {
+                List<Department> freshDepts = new ArrayList<>();
+                for (Department d : university.getDepartments()) {
+                    Department loaded = departmentService.getDepartmentById(d.getId());
+                    freshDepts.add(loaded != null ? loaded : d);
+                }
+                university.setDepartments(freshDepts);
+            }
+            if (roomService != null && university.getRooms() != null) {
+                List<Room> freshRooms = new ArrayList<>();
+                for (Room r : university.getRooms()) {
+                    Room loaded = roomService.getRoom(r.getId());
+                    freshRooms.add(loaded != null ? loaded : r);
+                }
+                university.setRooms(freshRooms);
+            }
+        }
+        return university;
     }
 }

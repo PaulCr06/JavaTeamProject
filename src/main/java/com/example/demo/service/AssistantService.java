@@ -4,8 +4,11 @@ import com.example.demo.model.Assistant;
 import com.example.demo.model.TeachingAssignment;
 import com.example.demo.repository.AssistantRepository;
 import com.example.demo.repository.TeachingAssignmentRepository;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Service;
+import org.springframework.web.server.ResponseStatusException;
 
+import java.util.ArrayList;
 import java.util.List;
 
 @Service
@@ -21,11 +24,29 @@ public class AssistantService {
         this.teachingAssignmentService = teachingAssignmentService;
     }
 
+    private void validateAssistant(Assistant assistant) {
+        if (assistant == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Assistant cannot be null!");
+        }
+        if (assistant.getName() == null || assistant.getName().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Assistant name must not be empty!");
+        }
+        if (assistant.getRole() == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Assistant role must be selected!");
+        }
+    }
+
     public Assistant saveAssistant(Assistant assistant) {
+        validateAssistant(assistant);
         return assistantRepository.save(assistant);
     }
 
     public Assistant updateAssistant(Assistant assistant) {
+        if (assistant == null || assistant.getId() == null) {
+            return null;
+        }
+        validateAssistant(assistant);
+
         Assistant existing = assistantRepository.findById(assistant.getId());
         if (existing == null) {
             return null;
@@ -39,7 +60,17 @@ public class AssistantService {
     }
 
     public Assistant getAssistantById(String id) {
-        return assistantRepository.findById(id);
+        Assistant assistant = assistantRepository.findById(id);
+        if (assistant != null && teachingAssignmentRepository != null) {
+            List<TeachingAssignment> assignments = new ArrayList<>();
+            for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
+                if (id.equals(assignment.getStaffId())) {
+                    assignments.add(assignment);
+                }
+            }
+            assistant.setAssignments(assignments);
+        }
+        return assistant;
     }
 
     public void deleteAssistant(String id) {
@@ -47,9 +78,11 @@ public class AssistantService {
             return;
         }
 
-        for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
-            if (id.equals(assignment.getStaffId())) {
-                teachingAssignmentService.deleteAssignment(assignment.getId());
+        if (teachingAssignmentRepository != null && teachingAssignmentService != null) {
+            for (TeachingAssignment assignment : teachingAssignmentRepository.findAll()) {
+                if (id.equals(assignment.getStaffId())) {
+                    teachingAssignmentService.deleteAssignment(assignment.getId());
+                }
             }
         }
         assistantRepository.delete(id);

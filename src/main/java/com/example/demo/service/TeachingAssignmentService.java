@@ -31,6 +31,16 @@ public class TeachingAssignmentService {
     }
 
     public TeachingAssignment saveAssignment(TeachingAssignment assignment) {
+        if (assignment == null) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Teaching assignment cannot be null!");
+        }
+        if (assignment.getCourseId() == null || assignment.getCourseId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course ID must not be empty!");
+        }
+        if (assignment.getStaffId() == null || assignment.getStaffId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Staff ID must not be empty!");
+        }
+
         Course course = courseRepository.findById(assignment.getCourseId());
         if (course == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course with this ID does not exist!");
@@ -38,6 +48,16 @@ public class TeachingAssignmentService {
         if (teacherRepository.findById(assignment.getStaffId()) == null
                 && assistantRepository.findById(assignment.getStaffId()) == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Teacher or Assistant with this ID does not exist!");
+        }
+
+        if (assignment.getManaging() != null) {
+            boolean alreadyAssigned = assignmentRepository.findAll().stream()
+                    .anyMatch(a -> assignment.getCourseId().equals(a.getCourseId())
+                            && assignment.getStaffId().equals(a.getStaffId())
+                            && assignment.getManaging() == a.getManaging());
+            if (alreadyAssigned) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Staff member already has this managing role for this course!");
+            }
         }
 
         TeachingAssignment savedAssignment = assignmentRepository.save(assignment);
@@ -48,9 +68,23 @@ public class TeachingAssignmentService {
     }
 
     public TeachingAssignment updateAssignment(TeachingAssignment assignment) {
+        if (assignment == null || assignment.getId() == null) {
+            return null;
+        }
+
         TeachingAssignment existing = assignmentRepository.findById(assignment.getId());
         if (existing == null) {
             return null;
+        }
+
+        if (assignment.getCourseId() == null || assignment.getCourseId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Course ID must not be empty!");
+        }
+        if (assignment.getStaffId() == null || assignment.getStaffId().isBlank()) {
+            throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Staff ID must not be empty!");
+        }
+        if (assignment.getManaging() == null) {
+            assignment.setManaging(existing.getManaging());
         }
 
         Course targetCourse = courseRepository.findById(assignment.getCourseId());
@@ -60,6 +94,17 @@ public class TeachingAssignmentService {
         if (teacherRepository.findById(assignment.getStaffId()) == null
                 && assistantRepository.findById(assignment.getStaffId()) == null) {
             throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Teacher or Assistant with this ID does not exist!");
+        }
+
+        if (assignment.getManaging() != null) {
+            boolean duplicateOther = assignmentRepository.findAll().stream()
+                    .anyMatch(a -> !a.getId().equals(assignment.getId())
+                            && assignment.getCourseId().equals(a.getCourseId())
+                            && assignment.getStaffId().equals(a.getStaffId())
+                            && assignment.getManaging() == a.getManaging());
+            if (duplicateOther) {
+                throw new ResponseStatusException(HttpStatus.BAD_REQUEST, "Error: Staff member already has this managing role for this course!");
+            }
         }
 
         Course oldCourse = courseRepository.findById(existing.getCourseId());

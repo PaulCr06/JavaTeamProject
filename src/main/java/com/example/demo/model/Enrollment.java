@@ -7,10 +7,17 @@ public class Enrollment implements Identifiable<String> {
     private String studentId;
     private String courseId;
     private Grade grade;
-
     private LocalDate enrollmentDate;
 
     public Enrollment(){}
+
+    public Enrollment(String studentId, String courseId, Grade grade, LocalDate enrollmentDate) {
+        this(null, studentId, courseId, grade, enrollmentDate);
+    }
+
+    public Enrollment(String studentId, String courseId, String grade, LocalDate enrollmentDate) {
+        this(null, studentId, courseId, parseGrade(grade), enrollmentDate);
+    }
 
     public Enrollment(String id, String studentId, String courseId, Grade grade, LocalDate enrollmentDate){
         this.id = id;

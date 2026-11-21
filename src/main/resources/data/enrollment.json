@@ -1,27 +1,9 @@
 [ {
-  "id" : "e5",
-  "studentId" : "5",
-  "courseId" : "c3",
-  "grade" : "D",
-  "enrollmentDate" : [ 2026, 10, 3 ]
-}, {
-  "id" : "e6",
-  "studentId" : "6",
-  "courseId" : "c3",
-  "grade" : "A",
-  "enrollmentDate" : [ 2026, 10, 3 ]
-}, {
   "id" : "e7",
   "studentId" : "7",
   "courseId" : "c4",
   "grade" : "B",
   "enrollmentDate" : [ 2026, 10, 4 ]
-}, {
-  "id" : "13",
-  "studentId" : "10",
-  "courseId" : "c3",
-  "grade" : "B",
-  "enrollmentDate" : [ 2026, 11, 3 ]
 }, {
   "id" : "e8",
   "studentId" : "8",

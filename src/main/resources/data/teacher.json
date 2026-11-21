@@ -38,12 +38,7 @@
 }, {
   "id" : "t3",
   "name" : "Serban Camelia",
-  "assignments" : [ {
-    "id" : "ta5",
-    "courseId" : "c3",
-    "staffId" : "t3",
-    "managing" : "Course"
-  } ],
+  "assignments" : [ ],
   "title" : "Associate Professor",
   "departmentId" : "dep2",
   "email" : "camelia.serban@ubbcluj.ro",
